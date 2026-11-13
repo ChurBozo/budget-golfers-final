@@ -1,0 +1,15 @@
+Connected to mongodb://127.0.0.1:27017/budget_golfers
+  users       8 documents
+  courses    15 documents
+  rounds    107 documents
+  clubs       7 documents
+
+Test accounts (password for all: Correct-Horse-7):
+  aroha.m@example.com      Aroha M.      32 rounds
+  tane.w@example.com       Tane W.       24 rounds
+  mei.l@example.com        Mei L.        18 rounds
+  sam.k@example.com        Sam K.         9 rounds
+  priya.r@example.com      Priya R.      12 rounds
+  hemi.t@example.com       Hemi T.       10 rounds
+  lucy.b@example.com       Lucy B.        2 rounds
+  new.golfer@example.com   New Golfer     0 rounds

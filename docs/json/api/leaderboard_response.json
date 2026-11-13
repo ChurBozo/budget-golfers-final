@@ -1,0 +1,38 @@
+{
+  "success": true,
+  "data": [
+    {
+      "rank": 1,
+      "userId": "66f0a1c2e4b0a1b2c3d4e001",
+      "displayName": "Tane W.",
+      "homeCourse": "Tauranga Golf Club",
+      "averageScore": 78.2,
+      "improvement": -1.4,
+      "roundsPlayed": 42
+    },
+    {
+      "rank": 2,
+      "userId": "66f0a1c2e4b0a1b2c3d4e002",
+      "displayName": "Mei L.",
+      "homeCourse": "Omanu Golf Club",
+      "averageScore": 81.6,
+      "improvement": -3.0,
+      "roundsPlayed": 29
+    }
+  ],
+  "meta": {
+    "sort": "avgScore",
+    "period": "season",
+    "minimumRounds": 3,
+    "page": 1,
+    "limit": 25,
+    "total": 142,
+    "currentUser": {
+      "rank": 5,
+      "averageScore": 91.4,
+      "improvement": -2.1,
+      "roundsPlayed": 37
+    },
+    "generatedAt": "2026-09-17T01:00:00.000Z"
+  }
+}

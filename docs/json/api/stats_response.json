@@ -1,0 +1,52 @@
+{
+  "success": true,
+  "data": {
+    "userId": "66f0a1c2e4b0a1b2c3d4e5f6",
+    "period": "last20",
+    "roundsInPeriod": 20,
+    "roundsAllTime": 37,
+    "scoring": {
+      "averageScore": 91.4,
+      "averageToPar": 19.2,
+      "bestScore": 84,
+      "bestRoundId": "66f2c9e0b1a2c3d4e5f60718",
+      "changeVsPreviousPeriod": -2.1
+    },
+    "putting": {
+      "puttsPerRound": 34.2,
+      "threePuttsPerRound": 2.6,
+      "changeVsPreviousPeriod": -0.8
+    },
+    "accuracy": {
+      "fairwaysHitPct": 48,
+      "greensInRegulationPct": 22,
+      "teeShotsOnTargetPct": 58,
+      "commonMiss": {
+        "direction": "left",
+        "club": "7i"
+      }
+    },
+    "scoreDistribution": {
+      "birdieOrBetter": 3,
+      "par": 52,
+      "bogey": 181,
+      "doubleOrWorse": 124
+    },
+    "trend": [
+      {
+        "roundId": "66f2c9e0b1a2c3d4e5f60718",
+        "playedAt": "2026-09-12",
+        "score": 84,
+        "rollingAverage": 88.6
+      },
+      {
+        "roundId": "66ea41b7b1a2c3d4e5f60611",
+        "playedAt": "2026-09-06",
+        "score": 89,
+        "rollingAverage": 89.8
+      }
+    ],
+    "handicapEstimate": 18.4,
+    "calculatedAt": "2026-09-12T04:41:03.000Z"
+  }
+}

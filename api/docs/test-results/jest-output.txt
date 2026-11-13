@@ -1,0 +1,156 @@
+PASS tests/integration/seed.test.js
+  ✓ every seed document passes its Mongoose schema (819 ms)
+  ✓ the collections have the expected sizes (9 ms)
+  ✓ all test accounts sign in with the documented password (802 ms)
+  ✓ the A2 example round is in the database and is Aroha's personal best (294 ms)
+  ✓ stored totals and snapshots match what the API calculates (92 ms)
+
+PASS tests/integration/api.test.js
+  POST /api/auth/register and /login
+    ✓ register returns 201, a token and the user without the password (22 ms)
+    ✓ the same email again gives 409 EMAIL_TAKEN (3 ms)
+    ✓ login works with any capitalisation of the email (5 ms)
+    ✓ the app gets a longer token and its device is remembered (11 ms)
+    ✓ a wrong password or unknown email gives the same 401 (8 ms)
+  /api/users
+    ✓ GET /me returns the profile with the home course and links (15 ms)
+    ✓ PATCH changes name and preferences, ignores role (13 ms)
+    ✓ PATCH homeCourseId must be one of my courses (27 ms)
+    ✓ export as JSON and CSV (72 ms)
+    ✓ DELETE removes the account and everything stored for it (69 ms)
+  POST /api/rounds (app upload)
+    ✓ 201 with totals worked out by the server and a Location header (39 ms)
+    ✓ the same clientRoundId again returns 200 duplicate:true and stores nothing new (47 ms)
+    ✓ two uploads of the same round at the same moment still store one (61 ms)
+    ✓ another golfer can use the same clientRoundId (111 ms)
+    ✓ self-named courses: different spellings find the same course (83 ms)
+    ✓ the course learns its holes, tees and par from rounds (48 ms)
+    ✓ GPS shots are stored as GeoJSON and measured by the server (65 ms)
+    ✓ a custom club must be in the bag first (47 ms)
+    ✓ courseId must be my own course (24 ms)
+  GET /api/rounds (list, filters, paging)
+    ✓ newest first, without hole data, with a personal best flag (12 ms)
+    ✓ filters by date range, holes and course (31 ms)
+    ✓ sorts by score and pages with links (8 ms)
+    ✓ another golfer's rounds are never listed (10 ms)
+  GET, PATCH, DELETE /api/rounds/:roundId
+    ✓ GET returns the full round; another golfer gets 404 (56 ms)
+    ✓ PATCH corrects a hole and the totals and stats are recalculated (72 ms)
+    ✓ PATCH rejects a hole that is not in the round, or putts above strokes (67 ms)
+    ✓ DELETE gives 204, then the round is gone and stats update (68 ms)
+  GET /api/stats/:userId
+    ✓ works out the dashboard numbers and the handicap estimate (106 ms)
+    ✓ a golfer with no rounds gets empty numbers, not an error (11 ms)
+  /api/clubs/:userId
+    ✓ a new golfer starts with the default 14-club bag (17 ms)
+    ✓ PUT replaces the bag; distances come only from recorded shots (54 ms)
+  GET /api/leaderboard
+    ✓ ranks opted-in golfers with at least 3 rounds, and includes my own rank (329 ms)
+
+PASS tests/http/routes.test.js
+  default route (A3: catch unintended routes)
+    ✓ get /api/does-not-exist gives HTTP 404 with a JSON message (30 ms)
+    ✓ get /nothing/here gives HTTP 404 with a JSON message (3 ms)
+    ✓ post /api/teapot gives HTTP 404 with a JSON message (3 ms)
+    ✓ delete /api gives HTTP 404 with a JSON message (4 ms)
+  health and index
+    ✓ GET /api/health (8 ms)
+    ✓ GET /api lists the resources (2 ms)
+    ✓ security headers are set and Express is not advertised (1 ms)
+  authentication
+    ✓ /api/users/me without a token gives 401 (1 ms)
+    ✓ /api/rounds without a token gives 401 (1 ms)
+    ✓ /api/courses without a token gives 401 (2 ms)
+    ✓ /api/stats/66f0a1c2e4b0a1b2c3d4e5f6 without a token gives 401 (2 ms)
+    ✓ /api/clubs/66f0a1c2e4b0a1b2c3d4e5f6 without a token gives 401 (2 ms)
+    ✓ /api/leaderboard without a token gives 401 (2 ms)
+    ✓ a forged token gives 401 (2 ms)
+    ✓ another golfer's stats give 403, as in A2 section 6.4 (2 ms)
+    ✓ changing another golfer's account or clubs gives 403 (6 ms)
+  validation (422 for the body, 400 for the query)
+    ✓ strokes out of range gives the A2 example error (4 ms)
+    ✓ putts cannot be more than strokes (2 ms)
+    ✓ a round must have 9 or 18 holes with no repeats (2 ms)
+    ✓ a huge holes array is rejected on its length alone (53 ms)
+    ✓ a huge shots array is rejected on its length alone (46 ms)
+    ✓ at most 50 field errors are sent back (14 ms)
+    ✓ playedAt cannot be in the future (2 ms)
+    ✓ a course name or courseId is required (2 ms)
+    ✓ limit=500 gives 400 BAD_REQUEST (A2 Table 8) (2 ms)
+    ✓ an unknown leaderboard sort gives 400 (2 ms)
+    ✓ a malformed round id gives 400 (2 ms)
+    ✓ malformed JSON gives 400 (3 ms)
+    ✓ register checks every field (2 ms)
+    ✓ more than 14 clubs in the bag is refused (3 ms)
+
+PASS tests/unit/totals.test.js
+  round totals (A2 Table 10: totals are calculated, never sent)
+    ✓ adds strokes, putts and penalties and works out score to par
+    ✓ green in regulation means on the green in par minus 2
+    ✓ normaliseHole removes fairwayHit on a par 3 and fills in GIR
+    ✓ normaliseHole measures shots from their GPS points
+  GPS distance
+    ✓ one degree of latitude is about 111 km
+    ✓ the A2 example drive is about 220 m
+    ✓ missing points give null
+
+PASS tests/unit/clubStats.test.js
+  club averages
+    ✓ average, longest and spread from measured shots
+    ✓ a club needs 5 measured shots before it gets an average (1 ms)
+    ✓ putts, chips under 30 m and unmeasured shots are left out
+    ✓ shots across several rounds are combined
+  merging stats into the bag
+    ✓ keeps the bag order, labels and inBag flags (1 ms)
+    ✓ a club with shots that is not in the list is added, not lost
+
+PASS tests/unit/handicapAndStats.test.js
+  handicap estimate (World Handicap System, simplified)
+    ✓ needs at least 3 rounds
+    ✓ 3 rounds: lowest differential minus 2
+    ✓ 20 rounds: average of the best 8
+    ✓ only the newest 20 rounds count
+    ✓ holes are capped at double bogey
+    ✓ uses course rating and slope when the tee has them
+  periods
+    ✓ last5 compares with the 5 rounds before
+    ✓ year uses the calendar year
+    ✓ leaderboard season starts on 1 January, month is the last 30 days
+  statistics for the dashboard
+    ✓ 9-hole rounds count as rounds but not in per-round averages (1 ms)
+    ✓ putting, three-putts and the score distribution
+    ✓ common miss and trend
+    ✓ the snapshot stored on the user
+
+PASS tests/unit/utils.test.js
+  self-named courses
+    ✓ different spellings of the same name match
+    ✓ the typed name is tidied but keeps its capitals
+  CSV export cells
+    ✓ quotes commas and quotes
+    ✓ blocks spreadsheet formulas in text
+  error field paths
+    ✓ match the A2 error example
+  pagination links
+    ✓ next and prev keep the filters (1 ms)
+  round JSON view
+    ✓ GeoJSON points go back to { lat, lng }
+
+PASS tests/unit/leaderboard.test.js
+  leaderboard summary
+    ✓ average score and improvement (newer half minus older half)
+    ✓ with an odd number of rounds the newer half has the extra round (1 ms)
+    ✓ a golfer getting worse has a positive improvement
+    ✓ the minimum is 3 rounds, as in the design
+  leaderboard ranking
+    ✓ avgScore: lowest average first
+    ✓ improved: biggest drop first
+    ✓ rounds: most rounds first (1 ms)
+    ✓ does not change the input array
+
+Test Suites: 8 passed, 8 total
+Tests:       108 passed, 108 total
+Snapshots:   0 total
+Time:        5.385 s, estimated 6 s
+Ran all test suites.
+Test results written to: docs/test-results/jest-results.json

@@ -1,0 +1,9 @@
+{
+  "email": "aroha.m@example.com",
+  "password": "Correct-Horse-7",
+  "client": "mobile-app",
+  "device": {
+    "deviceId": "app-7d2e41",
+    "platform": "android"
+  }
+}

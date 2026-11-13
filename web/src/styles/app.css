@@ -1,0 +1,177 @@
+/* Additions for the React build. styles.css is the Assignment 2 template,
+   unchanged; the template used :target to switch views, and React Router
+   now does that, so these few rules adapt it. */
+
+/* React Router renders one view at a time, so every rendered view shows. */
+.view {
+  display: block;
+}
+
+/* The template opened the auth page with #login:target; it is now its own route. */
+.auth {
+  display: grid;
+}
+
+/* NavLink's "active" class replaces the template's :target highlight. */
+.nav a.active {
+  background: var(--bottle-green);
+  color: #fff;
+  box-shadow: inset 3px 0 0 var(--turquoise-green);
+}
+@media (max-width: 760px) {
+  .nav a.active {
+    box-shadow: none;
+  }
+}
+
+/* The auth tabs are links to /login and /register. */
+.tabs a.active {
+  cursor: default;
+}
+
+/* Headings receive focus on navigation (for screen readers), without a ring. */
+h1[tabindex="-1"]:focus {
+  outline: none;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 8px;
+  z-index: 50;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: var(--fairway-dark);
+  color: #fff;
+}
+.skip-link:focus {
+  left: 8px;
+}
+
+button.btn:disabled,
+.btn[aria-disabled="true"] {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.notice {
+  border-style: solid;
+}
+
+.pref-error {
+  border: 0;
+  cursor: pointer;
+  background: #fbe9e5;
+  color: #7a2616;
+}
+
+.filter-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* Keep the accuracy donut round when the text beside it is long. */
+.donut {
+  flex: none;
+}
+
+/* Recharts sits inside the template's .chart box. */
+.chart {
+  position: relative;
+}
+.chart .recharts-tooltip-wrapper {
+  font-size: 0.85rem;
+}
+
+.stat-link {
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+/* Shot list (Wireframe 4): one expandable row per hole. */
+.shot-list {
+  display: grid;
+  gap: 8px;
+}
+.shot-list details {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 12px;
+}
+.shot-list summary {
+  display: grid;
+  grid-template-columns: 70px 1fr auto;
+  gap: 12px;
+  align-items: center;
+  cursor: pointer;
+  list-style: none;
+}
+.shot-list summary::-webkit-details-marker {
+  display: none;
+}
+.shot-list details[open] summary {
+  margin-bottom: 6px;
+}
+.shot-list ol {
+  margin: 0;
+  padding: 0 0 4px 22px;
+  display: grid;
+  gap: 4px;
+  font-size: 0.9rem;
+}
+.shot-list li {
+  display: grid;
+  grid-template-columns: 1fr 90px 110px;
+  gap: 10px;
+}
+
+/* Confirm dialog */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(11, 61, 46, 0.45);
+}
+.modal {
+  width: 100%;
+  max-width: 440px;
+}
+.modal-body {
+  margin: 8px 0 18px;
+}
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.not-found {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  text-align: center;
+}
+.not-found .card {
+  max-width: 420px;
+}
+.not-found img {
+  margin: 0 auto 16px;
+}
+
+@media (max-width: 760px) {
+  .shot-list li {
+    grid-template-columns: 1fr auto;
+  }
+  .shot-list li .muted {
+    grid-column: 1 / -1;
+  }
+  .pagination {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+}

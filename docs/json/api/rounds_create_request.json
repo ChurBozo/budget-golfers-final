@@ -1,0 +1,23 @@
+{
+  "clientRoundId": "a3f1c9e2-5b7d-4e8a-9c1f-2d6b8e4a7c10",
+  "courseId": "66e9b7d1a2c3d4e5f6a7b8c9",
+  "tee": "Yellow",
+  "playedAt": "2026-09-12T02:10:00.000Z",
+  "source": "mobile-app",
+  "holes": [
+    {
+      "number": 1,
+      "par": 4,
+      "distanceMetres": 352,
+      "strokes": 4,
+      "putts": 2,
+      "penalties": 0,
+      "teeClub": "driver",
+      "fairwayHit": true,
+      "greenInRegulation": true
+    },
+    {
+      "note": "…one object per hole played"
+    }
+  ]
+}

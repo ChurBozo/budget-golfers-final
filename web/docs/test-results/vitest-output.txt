@@ -1,0 +1,100 @@
+
+ RUN  v3.2.7 /home/claude/budget-golfers/web
+
+ ✓ tests/views.test.jsx > routing and sign-in > a private route without a session goes to /login 162ms
+ ✓ tests/views.test.jsx > routing and sign-in > client-side checks run before anything is sent 58ms
+ ✓ tests/views.test.jsx > routing and sign-in > a 401 is shown under the password field 219ms
+ ✓ tests/views.test.jsx > routing and sign-in > signing in returns the golfer to the page they asked for 328ms
+ ✓ tests/views.test.jsx > routing and sign-in > registering with a used email shows the 409 under the email field 253ms
+ ✓ tests/views.test.jsx > routing and sign-in > an unknown address shows the 404 view 11ms
+stderr | tests/views.test.jsx > dashboard > one stats request fills the cards, the user chip shows the handicap
+The width(0) and height(0) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+
+stderr | tests/views.test.jsx > dashboard > a period chip changes the URL and asks for that period
+The width(0) and height(0) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+
+stderr | tests/views.test.jsx > dashboard > a period chip changes the URL and asks for that period
+The width(0) and height(0) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+
+stderr | tests/views.test.jsx > dashboard > a period chip changes the URL and asks for that period
+The width(0) and height(0) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+
+ ✓ tests/views.test.jsx > dashboard > one stats request fills the cards, the user chip shows the handicap 370ms
+stderr | tests/views.test.jsx > dashboard > an error shows Retry, and Retry asks again
+The width(0) and height(0) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+
+ ✓ tests/views.test.jsx > dashboard > a period chip changes the URL and asks for that period 111ms
+ ✓ tests/views.test.jsx > dashboard > an error shows Retry, and Retry asks again 77ms
+ ✓ tests/views.test.jsx > rounds > applying filters puts them in the URL and in the request 101ms
+ ✓ tests/views.test.jsx > rounds > no matching rounds shows the empty state 32ms
+stderr | tests/views.test.jsx > preferences > units change at once and roll back if saving fails
+The width(0) and height(0) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+
+stderr | tests/views.test.jsx > preferences > units change at once and roll back if saving fails
+The width(0) and height(0) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+
+stderr | tests/views.test.jsx > preferences > units change at once and roll back if saving fails
+The width(0) and height(0) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+
+ ✓ tests/views.test.jsx > rounds > round detail: scorecard, then delete after confirming 249ms
+ ✓ tests/views.test.jsx > preferences > units change at once and roll back if saving fails 87ms
+ ✓ tests/views.test.jsx > clubs and leaderboard > clubs with too few shots get the empty state 68ms
+ ✓ tests/views.test.jsx > clubs and leaderboard > my row is highlighted and the sort chips re-request 123ms
+ ✓ tests/views.test.jsx > settings > a 422 from the profile form is shown beside the field 105ms
+ ✓ tests/views.test.jsx > settings > deleting the account needs DELETE typed first 149ms
+ ✓ tests/components.test.jsx > Scorecard > marks birdies, pars, bogeys and doubles, with Out, In and Total 94ms
+stderr | tests/components.test.jsx > LeaderboardTable > highlights the signed-in golfer's row and formats the numbers
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ ✓ tests/components.test.jsx > Scorecard > the distance row follows the unit preference 13ms
+ ✓ tests/components.test.jsx > LeaderboardTable > highlights the signed-in golfer's row and formats the numbers 77ms
+ ✓ tests/components.test.jsx > RoundRow > links to the round and shows a personal best badge 11ms
+ ✓ tests/components.test.jsx > StatCard wording > a lower score is shown as an improvement in green 1ms
+ ✓ tests/components.test.jsx > ClubBars > bars are scaled to the longest club and show the unit 9ms
+ ✓ tests/components.test.jsx > states and dialogs > the error state has a Retry button; a 404 does not reveal anything 29ms
+ ✓ tests/components.test.jsx > states and dialogs > the confirm dialog starts on Cancel and closes with Escape 25ms
+ ✓ tests/components.test.jsx > states and dialogs > pagination shows the range and disables Previous on page 1 12ms
+ ✓ tests/apiClient.test.js > apiClient.request > adds the token and query, and unwraps the envelope 4ms
+ ✓ tests/apiClient.test.js > apiClient.request > turns the API error envelope into one ApiError with field errors 2ms
+ ✓ tests/apiClient.test.js > apiClient.request > a 401 signs the golfer out, except on the sign-in request itself 2ms
+ ✓ tests/apiClient.test.js > apiClient.request > no connection gives a friendly NETWORK error 1ms
+ ✓ tests/apiClient.test.js > apiClient.request > 204 No Content and non-JSON 5xx replies 1ms
+ ✓ tests/apiClient.test.js > apiClient.request > an aborted request is passed through, not turned into an error message 1ms
+ ✓ tests/apiClient.test.js > apiClient.request > buildQuery 0ms
+ ✓ tests/format.test.js > format helpers > score to par uses E and a real minus sign 2ms
+ ✓ tests/format.test.js > format helpers > changes keep one decimal and a sign 0ms
+ ✓ tests/format.test.js > format helpers > metres convert to yards only for display 1ms
+ ✓ tests/format.test.js > format helpers > scorecard marks match the template classes 0ms
+ ✓ tests/format.test.js > format helpers > avatar initials and date tiles 1ms
+ ✓ tests/format.test.js > format helpers > club names 0ms
+
+ Test Files  4 passed (4)
+      Tests  39 passed (39)
+   Start at  14:26:12
+   Duration  6.88s (transform 486ms, setup 575ms, collect 458ms, tests 2.80s, environment 1.95s, prepare 333ms)
+

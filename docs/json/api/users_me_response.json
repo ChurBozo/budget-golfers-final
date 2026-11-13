@@ -1,0 +1,25 @@
+{
+  "success": true,
+  "data": {
+    "id": "66f0a1c2e4b0a1b2c3d4e5f6",
+    "email": "aroha.m@example.com",
+    "displayName": "Aroha M.",
+    "homeCourse": {
+      "id": "66e9b7d1a2c3d4e5f6a7b8c9",
+      "name": "Omanu Golf Club"
+    },
+    "handicapEstimate": 18.4,
+    "preferences": {
+      "units": "metric",
+      "theme": "light",
+      "showOnLeaderboard": true
+    },
+    "createdAt": "2026-08-02T09:14:00.000Z",
+    "links": {
+      "self": "/api/users/66f0a1c2e4b0a1b2c3d4e5f6",
+      "rounds": "/api/rounds",
+      "stats": "/api/stats/66f0a1c2e4b0a1b2c3d4e5f6",
+      "clubs": "/api/clubs/66f0a1c2e4b0a1b2c3d4e5f6"
+    }
+  }
+}

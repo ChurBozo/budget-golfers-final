@@ -1,0 +1,16 @@
+{
+  "success": true,
+  "data": {
+    "id": "66f2c9e0b1a2c3d4e5f60718",
+    "clientRoundId": "a3f1c9e2-5b7d-4e8a-9c1f-2d6b8e4a7c10",
+    "totals": {
+      "strokes": 84,
+      "toPar": 12,
+      "putts": 31
+    },
+    "duplicate": false,
+    "links": {
+      "self": "/api/rounds/66f2c9e0b1a2c3d4e5f60718"
+    }
+  }
+}

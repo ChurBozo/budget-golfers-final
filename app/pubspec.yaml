@@ -1,0 +1,50 @@
+name: golfapp
+description: >-
+  Budget Golfers phone app. Records rounds, GPS shots and club distances with
+  no account, and uploads them to the Budget Golfers API after sign-in.
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.5.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Versions match the ones the old Budget Golfers project resolved on this
+  # machine, so the native Android builds are already known to work.
+  mapbox_maps_flutter: 2.10.0
+  geolocator: ^13.0.4
+  fl_chart: ^0.65.0
+  google_fonts: ^6.3.0
+  shared_preferences: ^2.5.3
+
+  # Phase 1: rounds on the phone
+  sqflite: ^2.4.1
+  path: ^1.9.0
+  uuid: ^4.5.1
+
+  # Phase 2: sign-in and upload to the Budget Golfers API
+  http: ^1.5.0 # already used by the old project (via mapbox), so no new native code
+  flutter_secure_storage: ^9.2.4 # the sign-in token, in the Android Keystore
+  connectivity_plus: ^6.1.5 # upload waiting rounds when the phone reconnects
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.13.1
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/logoFinal.png
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: assets/logoFinal.png
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: assets/logoFinal.png
+  remove_alpha_ios: true

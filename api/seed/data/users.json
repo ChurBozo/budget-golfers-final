@@ -1,0 +1,302 @@
+[
+  {
+    "_id": {
+      "$oid": "66f0a1c2e4b0a1b2c3d4e5f6"
+    },
+    "email": "aroha.m@example.com",
+    "passwordHash": "$2a$12$JjBCeztoQ28SUtszq.TaSuIgYsdWF3qATdDXA87OCSHwgoP6gdChC",
+    "displayName": "Aroha M.",
+    "role": "golfer",
+    "homeCourseId": {
+      "$oid": "66e9b7d1a2c3d4e5f6a7b8c9"
+    },
+    "preferences": {
+      "units": "metric",
+      "theme": "light",
+      "showOnLeaderboard": true
+    },
+    "statsSnapshot": {
+      "roundsPlayed": 32,
+      "averageScoreLast20": 89.6,
+      "averageScorePrev20": 94.8,
+      "bestScore": 84,
+      "handicapEstimate": 15.1,
+      "lastRoundAt": {
+        "$date": "2026-10-31T00:00:00Z"
+      }
+    },
+    "devices": [
+      {
+        "deviceId": "app-7d2e41",
+        "platform": "android",
+        "lastSyncAt": {
+          "$date": "2026-10-31T06:13:26.543Z"
+        }
+      }
+    ],
+    "createdAt": {
+      "$date": "2025-10-18T08:30:00Z"
+    },
+    "updatedAt": {
+      "$date": "2026-10-31T06:13:26.543Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "66f0a1c2e4b0a1b2c3d4e001"
+    },
+    "email": "tane.w@example.com",
+    "passwordHash": "$2a$12$yHr2ekg/QYGwl9.1RKZAy.Z08EHW4.82HO2FxQnjuRIn0mLHJOB0e",
+    "displayName": "Tane W.",
+    "role": "golfer",
+    "homeCourseId": {
+      "$oid": "66e9b7d1a2c3d4e5f6a7b903"
+    },
+    "preferences": {
+      "units": "metric",
+      "theme": "dark",
+      "showOnLeaderboard": true
+    },
+    "statsSnapshot": {
+      "roundsPlayed": 24,
+      "averageScoreLast20": 77.4,
+      "averageScorePrev20": 76,
+      "bestScore": 69,
+      "handicapEstimate": 2,
+      "lastRoundAt": {
+        "$date": "2026-10-31T20:30:00Z"
+      }
+    },
+    "devices": [
+      {
+        "deviceId": "app-a19c03",
+        "platform": "android",
+        "lastSyncAt": {
+          "$date": "2026-11-01T23:26:34.851Z"
+        }
+      }
+    ],
+    "createdAt": {
+      "$date": "2025-10-25T05:00:00Z"
+    },
+    "updatedAt": {
+      "$date": "2026-11-01T23:26:34.851Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "66f0a1c2e4b0a1b2c3d4e002"
+    },
+    "email": "mei.l@example.com",
+    "passwordHash": "$2a$12$g7OnArxp1aQ6rCPm1.NNA.b/jBO4gfyJx4V2X/Q7Ejxr15jt4APPe",
+    "displayName": "Mei L.",
+    "role": "golfer",
+    "homeCourseId": {
+      "$oid": "66e9b7d1a2c3d4e5f6a7b906"
+    },
+    "preferences": {
+      "units": "metric",
+      "theme": "light",
+      "showOnLeaderboard": true
+    },
+    "statsSnapshot": {
+      "roundsPlayed": 18,
+      "averageScoreLast20": 84.6,
+      "averageScorePrev20": null,
+      "bestScore": 78,
+      "handicapEstimate": 10.2,
+      "lastRoundAt": {
+        "$date": "2026-11-01T00:30:00Z"
+      }
+    },
+    "devices": [
+      {
+        "deviceId": "app-5be711",
+        "platform": "android",
+        "lastSyncAt": {
+          "$date": "2026-11-02T03:54:03.463Z"
+        }
+      }
+    ],
+    "createdAt": {
+      "$date": "2025-11-02T04:00:00Z"
+    },
+    "updatedAt": {
+      "$date": "2026-11-02T03:54:03.463Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "66f0a1c2e4b0a1b2c3d4e003"
+    },
+    "email": "sam.k@example.com",
+    "passwordHash": "$2a$12$7NjerMmdvrwls8j5DyZObuomZxKIeugaub4RZKVXSxkdyDm93lD26",
+    "displayName": "Sam K.",
+    "role": "golfer",
+    "homeCourseId": {
+      "$oid": "66e9b7d1a2c3d4e5f6a7b908"
+    },
+    "preferences": {
+      "units": "metric",
+      "theme": "light",
+      "showOnLeaderboard": true
+    },
+    "statsSnapshot": {
+      "roundsPlayed": 9,
+      "averageScoreLast20": 94.4,
+      "averageScorePrev20": null,
+      "bestScore": 88,
+      "handicapEstimate": 18,
+      "lastRoundAt": {
+        "$date": "2026-10-30T21:10:00Z"
+      }
+    },
+    "devices": [],
+    "createdAt": {
+      "$date": "2026-02-10T06:00:00Z"
+    },
+    "updatedAt": {
+      "$date": "2026-10-31T04:24:12.303Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "66f0a1c2e4b0a1b2c3d4e004"
+    },
+    "email": "priya.r@example.com",
+    "passwordHash": "$2a$12$oktI8s07/3ykzhHffVZfnO2zjKnPyh5UEwN1ezGMaeeTSVC7vxixS",
+    "displayName": "Priya R.",
+    "role": "golfer",
+    "homeCourseId": {
+      "$oid": "66e9b7d1a2c3d4e5f6a7b90a"
+    },
+    "preferences": {
+      "units": "imperial",
+      "theme": "dark",
+      "showOnLeaderboard": true
+    },
+    "statsSnapshot": {
+      "roundsPlayed": 12,
+      "averageScoreLast20": 87.3,
+      "averageScorePrev20": null,
+      "bestScore": 82,
+      "handicapEstimate": 12.3,
+      "lastRoundAt": {
+        "$date": "2026-10-30T21:50:00Z"
+      }
+    },
+    "devices": [
+      {
+        "deviceId": "app-c0ffee",
+        "platform": "android",
+        "lastSyncAt": {
+          "$date": "2026-10-31T14:43:08.739Z"
+        }
+      }
+    ],
+    "createdAt": {
+      "$date": "2026-01-15T07:00:00Z"
+    },
+    "updatedAt": {
+      "$date": "2026-10-31T14:43:08.739Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "66f0a1c2e4b0a1b2c3d4e005"
+    },
+    "email": "hemi.t@example.com",
+    "passwordHash": "$2a$12$QP68f9vb/EDfU5emIYJYAueLWeYCrmmxG4yJHs5ot26gqgwxUd9Sy",
+    "displayName": "Hemi T.",
+    "role": "golfer",
+    "homeCourseId": {
+      "$oid": "66e9b7d1a2c3d4e5f6a7b90c"
+    },
+    "preferences": {
+      "units": "metric",
+      "theme": "light",
+      "showOnLeaderboard": false
+    },
+    "statsSnapshot": {
+      "roundsPlayed": 10,
+      "averageScoreLast20": 87.4,
+      "averageScorePrev20": null,
+      "bestScore": 81,
+      "handicapEstimate": 12.6,
+      "lastRoundAt": {
+        "$date": "2026-10-30T19:30:00Z"
+      }
+    },
+    "devices": [],
+    "createdAt": {
+      "$date": "2026-03-01T06:00:00Z"
+    },
+    "updatedAt": {
+      "$date": "2026-10-31T02:31:39.759Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "66f0a1c2e4b0a1b2c3d4e006"
+    },
+    "email": "lucy.b@example.com",
+    "passwordHash": "$2a$12$8ZTBNFx4SkGneirHAXYnkONbLJ3fuVjAt2cGh/cl9se/JQk/eZukK",
+    "displayName": "Lucy B.",
+    "role": "golfer",
+    "homeCourseId": {
+      "$oid": "66e9b7d1a2c3d4e5f6a7b90d"
+    },
+    "preferences": {
+      "units": "metric",
+      "theme": "light",
+      "showOnLeaderboard": true
+    },
+    "statsSnapshot": {
+      "roundsPlayed": 2,
+      "averageScoreLast20": 100.5,
+      "averageScorePrev20": null,
+      "bestScore": 99,
+      "handicapEstimate": null,
+      "lastRoundAt": {
+        "$date": "2026-10-28T20:40:00Z"
+      }
+    },
+    "devices": [],
+    "createdAt": {
+      "$date": "2026-10-01T06:00:00Z"
+    },
+    "updatedAt": {
+      "$date": "2026-10-29T09:01:43.567Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "66f0a1c2e4b0a1b2c3d4e007"
+    },
+    "email": "new.golfer@example.com",
+    "passwordHash": "$2a$12$wqoDA2H6Z0R/t11iagQL3OrDoiyBAzm0FN6QPvYgTG/zq9oWDp7ui",
+    "displayName": "New Golfer",
+    "role": "golfer",
+    "homeCourseId": null,
+    "preferences": {
+      "units": "metric",
+      "theme": "light",
+      "showOnLeaderboard": true
+    },
+    "statsSnapshot": {
+      "roundsPlayed": 0,
+      "averageScoreLast20": null,
+      "averageScorePrev20": null,
+      "bestScore": null,
+      "handicapEstimate": null,
+      "lastRoundAt": null
+    },
+    "devices": [],
+    "createdAt": {
+      "$date": "2026-11-03T06:00:00Z"
+    },
+    "updatedAt": {
+      "$date": "2026-11-03T06:00:00Z"
+    }
+  }
+]

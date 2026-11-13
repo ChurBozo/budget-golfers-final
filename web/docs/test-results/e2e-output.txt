@@ -1,0 +1,30 @@
+Budget Golfers end-to-end test
+  website http://127.0.0.1:5000
+  API     http://localhost:3000
+
+  ✓ A private page without a session redirects to /login
+  ✓ Wrong password shows the API 401 message under the field
+  ✓ Register checks the fields in the browser first
+  ✓ Registering a new golfer signs them in to an empty dashboard
+  ✓ Rounds uploaded with the app format appear after a refresh
+  ✓ Period chips change the URL and the numbers
+  ✓ Round history filters live in the URL
+  ✓ Round detail shows the scorecard and the shot list
+  ✓ Deleting a round asks first, then returns to the list
+  ✓ Units change to yards and are saved on the account
+  ✓ Deep link: a new tab asks to sign in, then opens that round
+  ✓ Settings: export downloads a CSV file
+  ✓ Settings: deleting the account needs DELETE typed, then signs out
+  ✓ Dashboard for the seeded golfer (light theme)
+  ✓ API annotations show which request fills each component
+  ✓ Round history and filters
+  ✓ Round detail: the A2 example round
+  ✓ Clubs: distance bars and the not-enough-data state
+  ✓ Leaderboard: own row highlighted, sort and period chips
+  ✓ Settings
+  ✓ Unknown address shows the 404 view
+  ✓ Dark theme (saved on the account)
+  ✓ Phone layout: bottom tab bar under 760 px
+  ✓ No JavaScript errors in the browser console
+
+24 passed, 0 failed. Screenshots in docs/test-results/screenshots/

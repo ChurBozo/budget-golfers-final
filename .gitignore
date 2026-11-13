@@ -1,0 +1,16 @@
+# Tokens and machine-specific paths: never commit
+**/config/mapbox.json
+*.env
+.env*
+!.env.example
+**/android/local.properties
+
+# Node (api/, web/)
+node_modules/
+dist/
+coverage/
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.idea/

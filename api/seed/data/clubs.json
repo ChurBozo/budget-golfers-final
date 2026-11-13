@@ -1,0 +1,1213 @@
+[
+  {
+    "_id": {
+      "$oid": "66f0a1c2e4b0a1b2c3d4e600"
+    },
+    "userId": {
+      "$oid": "66f0a1c2e4b0a1b2c3d4e5f6"
+    },
+    "clubs": [
+      {
+        "code": "driver",
+        "label": "Driver",
+        "inBag": true,
+        "stats": {
+          "shotCount": 370,
+          "averageMetres": 212,
+          "longestMetres": 258,
+          "spreadMetres": 14
+        }
+      },
+      {
+        "code": "3w",
+        "label": "3 wood",
+        "inBag": true,
+        "stats": {
+          "shotCount": 3,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      },
+      {
+        "code": "5w",
+        "label": "5 wood",
+        "inBag": true,
+        "stats": {
+          "shotCount": 17,
+          "averageMetres": 176,
+          "longestMetres": 181,
+          "spreadMetres": 3
+        }
+      },
+      {
+        "code": "4h",
+        "label": "4 hybrid",
+        "inBag": true,
+        "stats": {
+          "shotCount": 15,
+          "averageMetres": 163,
+          "longestMetres": 169,
+          "spreadMetres": 3
+        }
+      },
+      {
+        "code": "4i",
+        "label": "4 iron",
+        "inBag": true,
+        "stats": {
+          "shotCount": 0,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      },
+      {
+        "code": "5i",
+        "label": "5 iron",
+        "inBag": true,
+        "stats": {
+          "shotCount": 32,
+          "averageMetres": 151,
+          "longestMetres": 158,
+          "spreadMetres": 9
+        }
+      },
+      {
+        "code": "6i",
+        "label": "6 iron",
+        "inBag": true,
+        "stats": {
+          "shotCount": 28,
+          "averageMetres": 145,
+          "longestMetres": 148,
+          "spreadMetres": 2
+        }
+      },
+      {
+        "code": "7i",
+        "label": "7 iron",
+        "inBag": true,
+        "stats": {
+          "shotCount": 75,
+          "averageMetres": 137,
+          "longestMetres": 142,
+          "spreadMetres": 2
+        }
+      },
+      {
+        "code": "8i",
+        "label": "8 iron",
+        "inBag": true,
+        "stats": {
+          "shotCount": 128,
+          "averageMetres": 128,
+          "longestMetres": 133,
+          "spreadMetres": 3
+        }
+      },
+      {
+        "code": "9i",
+        "label": "9 iron",
+        "inBag": true,
+        "stats": {
+          "shotCount": 130,
+          "averageMetres": 115,
+          "longestMetres": 121,
+          "spreadMetres": 4
+        }
+      },
+      {
+        "code": "pw",
+        "label": "Pitching wedge",
+        "inBag": true,
+        "stats": {
+          "shotCount": 123,
+          "averageMetres": 99,
+          "longestMetres": 108,
+          "spreadMetres": 6
+        }
+      },
+      {
+        "code": "sw",
+        "label": "Sand wedge",
+        "inBag": true,
+        "stats": {
+          "shotCount": 35,
+          "averageMetres": 77,
+          "longestMetres": 86,
+          "spreadMetres": 6
+        }
+      },
+      {
+        "code": "lw",
+        "label": "Lob wedge",
+        "inBag": true,
+        "stats": {
+          "shotCount": 5,
+          "averageMetres": 59,
+          "longestMetres": 60,
+          "spreadMetres": 1
+        }
+      },
+      {
+        "code": "putter",
+        "label": "Putter",
+        "inBag": true,
+        "stats": {
+          "shotCount": 0,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      }
+    ],
+    "recalculatedAt": {
+      "$date": "2026-10-31T06:13:26.543Z"
+    },
+    "createdAt": {
+      "$date": "2025-10-18T08:30:00Z"
+    },
+    "updatedAt": {
+      "$date": "2026-10-31T06:13:26.543Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "66f0a1c2e4b0a1b2c3d4e602"
+    },
+    "userId": {
+      "$oid": "66f0a1c2e4b0a1b2c3d4e001"
+    },
+    "clubs": [
+      {
+        "code": "driver",
+        "label": "Driver",
+        "inBag": true,
+        "stats": {
+          "shotCount": 190,
+          "averageMetres": 247,
+          "longestMetres": 291,
+          "spreadMetres": 15
+        }
+      },
+      {
+        "code": "3w",
+        "label": "3 wood",
+        "inBag": true,
+        "stats": {
+          "shotCount": 25,
+          "averageMetres": 231,
+          "longestMetres": 274,
+          "spreadMetres": 14
+        }
+      },
+      {
+        "code": "5w",
+        "label": "5 wood",
+        "inBag": true,
+        "stats": {
+          "shotCount": 13,
+          "averageMetres": 207,
+          "longestMetres": 212,
+          "spreadMetres": 4
+        }
+      },
+      {
+        "code": "4h",
+        "label": "4 hybrid",
+        "inBag": true,
+        "stats": {
+          "shotCount": 5,
+          "averageMetres": 194,
+          "longestMetres": 197,
+          "spreadMetres": 3
+        }
+      },
+      {
+        "code": "5i",
+        "label": "5 iron",
+        "inBag": true,
+        "stats": {
+          "shotCount": 8,
+          "averageMetres": 176,
+          "longestMetres": 180,
+          "spreadMetres": 3
+        }
+      },
+      {
+        "code": "6i",
+        "label": "6 iron",
+        "inBag": true,
+        "stats": {
+          "shotCount": 4,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      },
+      {
+        "code": "7i",
+        "label": "7 iron",
+        "inBag": true,
+        "stats": {
+          "shotCount": 13,
+          "averageMetres": 162,
+          "longestMetres": 165,
+          "spreadMetres": 2
+        }
+      },
+      {
+        "code": "8i",
+        "label": "8 iron",
+        "inBag": true,
+        "stats": {
+          "shotCount": 29,
+          "averageMetres": 148,
+          "longestMetres": 155,
+          "spreadMetres": 4
+        }
+      },
+      {
+        "code": "9i",
+        "label": "9 iron",
+        "inBag": true,
+        "stats": {
+          "shotCount": 30,
+          "averageMetres": 134,
+          "longestMetres": 141,
+          "spreadMetres": 4
+        }
+      },
+      {
+        "code": "pw",
+        "label": "Pitching wedge",
+        "inBag": true,
+        "stats": {
+          "shotCount": 28,
+          "averageMetres": 119,
+          "longestMetres": 126,
+          "spreadMetres": 5
+        }
+      },
+      {
+        "code": "gw",
+        "label": "Gap wedge",
+        "inBag": true,
+        "stats": {
+          "shotCount": 23,
+          "averageMetres": 102,
+          "longestMetres": 110,
+          "spreadMetres": 6
+        }
+      },
+      {
+        "code": "sw",
+        "label": "Sand wedge",
+        "inBag": true,
+        "stats": {
+          "shotCount": 40,
+          "averageMetres": 84,
+          "longestMetres": 92,
+          "spreadMetres": 5
+        }
+      },
+      {
+        "code": "lw",
+        "label": "Lob wedge",
+        "inBag": true,
+        "stats": {
+          "shotCount": 40,
+          "averageMetres": 63,
+          "longestMetres": 73,
+          "spreadMetres": 5
+        }
+      },
+      {
+        "code": "putter",
+        "label": "Putter",
+        "inBag": true,
+        "stats": {
+          "shotCount": 0,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      }
+    ],
+    "recalculatedAt": {
+      "$date": "2026-11-01T23:26:34.851Z"
+    },
+    "createdAt": {
+      "$date": "2025-10-25T05:00:00Z"
+    },
+    "updatedAt": {
+      "$date": "2026-11-01T23:26:34.851Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "66f0a1c2e4b0a1b2c3d4e603"
+    },
+    "userId": {
+      "$oid": "66f0a1c2e4b0a1b2c3d4e002"
+    },
+    "clubs": [
+      {
+        "code": "driver",
+        "label": "Driver",
+        "inBag": true,
+        "stats": {
+          "shotCount": 110,
+          "averageMetres": 202,
+          "longestMetres": 243,
+          "spreadMetres": 15
+        }
+      },
+      {
+        "code": "3w",
+        "label": "3 wood",
+        "inBag": true,
+        "stats": {
+          "shotCount": 7,
+          "averageMetres": 180,
+          "longestMetres": 189,
+          "spreadMetres": 5
+        }
+      },
+      {
+        "code": "5w",
+        "label": "5 wood",
+        "inBag": true,
+        "stats": {
+          "shotCount": 9,
+          "averageMetres": 168,
+          "longestMetres": 173,
+          "spreadMetres": 4
+        }
+      },
+      {
+        "code": "4h",
+        "label": "4 hybrid",
+        "inBag": true,
+        "stats": {
+          "shotCount": 16,
+          "averageMetres": 154,
+          "longestMetres": 160,
+          "spreadMetres": 3
+        }
+      },
+      {
+        "code": "5i",
+        "label": "5 iron",
+        "inBag": true,
+        "stats": {
+          "shotCount": 23,
+          "averageMetres": 145,
+          "longestMetres": 150,
+          "spreadMetres": 3
+        }
+      },
+      {
+        "code": "6i",
+        "label": "6 iron",
+        "inBag": true,
+        "stats": {
+          "shotCount": 15,
+          "averageMetres": 138,
+          "longestMetres": 141,
+          "spreadMetres": 2
+        }
+      },
+      {
+        "code": "7i",
+        "label": "7 iron",
+        "inBag": true,
+        "stats": {
+          "shotCount": 32,
+          "averageMetres": 132,
+          "longestMetres": 135,
+          "spreadMetres": 2
+        }
+      },
+      {
+        "code": "8i",
+        "label": "8 iron",
+        "inBag": true,
+        "stats": {
+          "shotCount": 31,
+          "averageMetres": 121,
+          "longestMetres": 127,
+          "spreadMetres": 4
+        }
+      },
+      {
+        "code": "9i",
+        "label": "9 iron",
+        "inBag": true,
+        "stats": {
+          "shotCount": 27,
+          "averageMetres": 110,
+          "longestMetres": 115,
+          "spreadMetres": 3
+        }
+      },
+      {
+        "code": "pw",
+        "label": "Pitching wedge",
+        "inBag": true,
+        "stats": {
+          "shotCount": 12,
+          "averageMetres": 98,
+          "longestMetres": 102,
+          "spreadMetres": 3
+        }
+      },
+      {
+        "code": "gw",
+        "label": "Gap wedge",
+        "inBag": true,
+        "stats": {
+          "shotCount": 3,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      },
+      {
+        "code": "sw",
+        "label": "Sand wedge",
+        "inBag": true,
+        "stats": {
+          "shotCount": 1,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      },
+      {
+        "code": "lw",
+        "label": "Lob wedge",
+        "inBag": true,
+        "stats": {
+          "shotCount": 0,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      },
+      {
+        "code": "putter",
+        "label": "Putter",
+        "inBag": true,
+        "stats": {
+          "shotCount": 0,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      }
+    ],
+    "recalculatedAt": {
+      "$date": "2026-11-02T03:54:03.463Z"
+    },
+    "createdAt": {
+      "$date": "2025-11-02T04:00:00Z"
+    },
+    "updatedAt": {
+      "$date": "2026-11-02T03:54:03.463Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "66f0a1c2e4b0a1b2c3d4e604"
+    },
+    "userId": {
+      "$oid": "66f0a1c2e4b0a1b2c3d4e003"
+    },
+    "clubs": [
+      {
+        "code": "driver",
+        "label": "Driver",
+        "inBag": true,
+        "stats": {
+          "shotCount": 13,
+          "averageMetres": 192,
+          "longestMetres": 227,
+          "spreadMetres": 16
+        }
+      },
+      {
+        "code": "3w",
+        "label": "3 wood",
+        "inBag": true,
+        "stats": {
+          "shotCount": 4,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      },
+      {
+        "code": "5w",
+        "label": "5 wood",
+        "inBag": true,
+        "stats": {
+          "shotCount": 1,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      },
+      {
+        "code": "4h",
+        "label": "4 hybrid",
+        "inBag": true,
+        "stats": {
+          "shotCount": 2,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      },
+      {
+        "code": "5i",
+        "label": "5 iron",
+        "inBag": true,
+        "stats": {
+          "shotCount": 3,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      },
+      {
+        "code": "6i",
+        "label": "6 iron",
+        "inBag": true,
+        "stats": {
+          "shotCount": 1,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      },
+      {
+        "code": "7i",
+        "label": "7 iron",
+        "inBag": true,
+        "stats": {
+          "shotCount": 0,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      },
+      {
+        "code": "8i",
+        "label": "8 iron",
+        "inBag": true,
+        "stats": {
+          "shotCount": 5,
+          "averageMetres": 116,
+          "longestMetres": 119,
+          "spreadMetres": 2
+        }
+      },
+      {
+        "code": "9i",
+        "label": "9 iron",
+        "inBag": true,
+        "stats": {
+          "shotCount": 3,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      },
+      {
+        "code": "pw",
+        "label": "Pitching wedge",
+        "inBag": true,
+        "stats": {
+          "shotCount": 1,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      },
+      {
+        "code": "gw",
+        "label": "Gap wedge",
+        "inBag": true,
+        "stats": {
+          "shotCount": 0,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      },
+      {
+        "code": "sw",
+        "label": "Sand wedge",
+        "inBag": true,
+        "stats": {
+          "shotCount": 1,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      },
+      {
+        "code": "lw",
+        "label": "Lob wedge",
+        "inBag": true,
+        "stats": {
+          "shotCount": 0,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      },
+      {
+        "code": "putter",
+        "label": "Putter",
+        "inBag": true,
+        "stats": {
+          "shotCount": 0,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      }
+    ],
+    "recalculatedAt": {
+      "$date": "2026-10-31T04:24:12.303Z"
+    },
+    "createdAt": {
+      "$date": "2026-02-10T06:00:00Z"
+    },
+    "updatedAt": {
+      "$date": "2026-10-31T04:24:12.303Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "66f0a1c2e4b0a1b2c3d4e605"
+    },
+    "userId": {
+      "$oid": "66f0a1c2e4b0a1b2c3d4e004"
+    },
+    "clubs": [
+      {
+        "code": "driver",
+        "label": "Driver",
+        "inBag": true,
+        "stats": {
+          "shotCount": 152,
+          "averageMetres": 196,
+          "longestMetres": 238,
+          "spreadMetres": 13
+        }
+      },
+      {
+        "code": "3w",
+        "label": "3 wood",
+        "inBag": true,
+        "stats": {
+          "shotCount": 18,
+          "averageMetres": 182,
+          "longestMetres": 202,
+          "spreadMetres": 10
+        }
+      },
+      {
+        "code": "5w",
+        "label": "5 wood",
+        "inBag": true,
+        "stats": {
+          "shotCount": 15,
+          "averageMetres": 162,
+          "longestMetres": 168,
+          "spreadMetres": 3
+        }
+      },
+      {
+        "code": "4h",
+        "label": "4 hybrid",
+        "inBag": true,
+        "stats": {
+          "shotCount": 24,
+          "averageMetres": 151,
+          "longestMetres": 156,
+          "spreadMetres": 3
+        }
+      },
+      {
+        "code": "5i",
+        "label": "5 iron",
+        "inBag": true,
+        "stats": {
+          "shotCount": 24,
+          "averageMetres": 142,
+          "longestMetres": 145,
+          "spreadMetres": 2
+        }
+      },
+      {
+        "code": "6i",
+        "label": "6 iron",
+        "inBag": true,
+        "stats": {
+          "shotCount": 24,
+          "averageMetres": 135,
+          "longestMetres": 137,
+          "spreadMetres": 2
+        }
+      },
+      {
+        "code": "7i",
+        "label": "7 iron",
+        "inBag": true,
+        "stats": {
+          "shotCount": 35,
+          "averageMetres": 128,
+          "longestMetres": 131,
+          "spreadMetres": 2
+        }
+      },
+      {
+        "code": "8i",
+        "label": "8 iron",
+        "inBag": true,
+        "stats": {
+          "shotCount": 45,
+          "averageMetres": 118,
+          "longestMetres": 123,
+          "spreadMetres": 3
+        }
+      },
+      {
+        "code": "9i",
+        "label": "9 iron",
+        "inBag": true,
+        "stats": {
+          "shotCount": 29,
+          "averageMetres": 109,
+          "longestMetres": 112,
+          "spreadMetres": 3
+        }
+      },
+      {
+        "code": "pw",
+        "label": "Pitching wedge",
+        "inBag": true,
+        "stats": {
+          "shotCount": 12,
+          "averageMetres": 95,
+          "longestMetres": 98,
+          "spreadMetres": 3
+        }
+      },
+      {
+        "code": "gw",
+        "label": "Gap wedge",
+        "inBag": true,
+        "stats": {
+          "shotCount": 7,
+          "averageMetres": 81,
+          "longestMetres": 85,
+          "spreadMetres": 4
+        }
+      },
+      {
+        "code": "sw",
+        "label": "Sand wedge",
+        "inBag": true,
+        "stats": {
+          "shotCount": 0,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      },
+      {
+        "code": "lw",
+        "label": "Lob wedge",
+        "inBag": true,
+        "stats": {
+          "shotCount": 0,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      },
+      {
+        "code": "putter",
+        "label": "Putter",
+        "inBag": true,
+        "stats": {
+          "shotCount": 0,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      }
+    ],
+    "recalculatedAt": {
+      "$date": "2026-10-31T14:43:08.739Z"
+    },
+    "createdAt": {
+      "$date": "2026-01-15T07:00:00Z"
+    },
+    "updatedAt": {
+      "$date": "2026-10-31T14:43:08.739Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "66f0a1c2e4b0a1b2c3d4e606"
+    },
+    "userId": {
+      "$oid": "66f0a1c2e4b0a1b2c3d4e005"
+    },
+    "clubs": [
+      {
+        "code": "driver",
+        "label": "Driver",
+        "inBag": true,
+        "stats": {
+          "shotCount": 55,
+          "averageMetres": 223,
+          "longestMetres": 250,
+          "spreadMetres": 16
+        }
+      },
+      {
+        "code": "3w",
+        "label": "3 wood",
+        "inBag": true,
+        "stats": {
+          "shotCount": 11,
+          "averageMetres": 217,
+          "longestMetres": 250,
+          "spreadMetres": 17
+        }
+      },
+      {
+        "code": "5w",
+        "label": "5 wood",
+        "inBag": true,
+        "stats": {
+          "shotCount": 1,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      },
+      {
+        "code": "4h",
+        "label": "4 hybrid",
+        "inBag": true,
+        "stats": {
+          "shotCount": 2,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      },
+      {
+        "code": "5i",
+        "label": "5 iron",
+        "inBag": true,
+        "stats": {
+          "shotCount": 5,
+          "averageMetres": 160,
+          "longestMetres": 165,
+          "spreadMetres": 3
+        }
+      },
+      {
+        "code": "6i",
+        "label": "6 iron",
+        "inBag": true,
+        "stats": {
+          "shotCount": 3,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      },
+      {
+        "code": "7i",
+        "label": "7 iron",
+        "inBag": true,
+        "stats": {
+          "shotCount": 2,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      },
+      {
+        "code": "8i",
+        "label": "8 iron",
+        "inBag": true,
+        "stats": {
+          "shotCount": 10,
+          "averageMetres": 136,
+          "longestMetres": 139,
+          "spreadMetres": 3
+        }
+      },
+      {
+        "code": "9i",
+        "label": "9 iron",
+        "inBag": true,
+        "stats": {
+          "shotCount": 15,
+          "averageMetres": 122,
+          "longestMetres": 128,
+          "spreadMetres": 4
+        }
+      },
+      {
+        "code": "pw",
+        "label": "Pitching wedge",
+        "inBag": true,
+        "stats": {
+          "shotCount": 14,
+          "averageMetres": 107,
+          "longestMetres": 113,
+          "spreadMetres": 4
+        }
+      },
+      {
+        "code": "gw",
+        "label": "Gap wedge",
+        "inBag": true,
+        "stats": {
+          "shotCount": 10,
+          "averageMetres": 93,
+          "longestMetres": 99,
+          "spreadMetres": 5
+        }
+      },
+      {
+        "code": "sw",
+        "label": "Sand wedge",
+        "inBag": true,
+        "stats": {
+          "shotCount": 4,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      },
+      {
+        "code": "lw",
+        "label": "Lob wedge",
+        "inBag": true,
+        "stats": {
+          "shotCount": 0,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      },
+      {
+        "code": "putter",
+        "label": "Putter",
+        "inBag": true,
+        "stats": {
+          "shotCount": 0,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      }
+    ],
+    "recalculatedAt": {
+      "$date": "2026-10-31T02:31:39.759Z"
+    },
+    "createdAt": {
+      "$date": "2026-03-01T06:00:00Z"
+    },
+    "updatedAt": {
+      "$date": "2026-10-31T02:31:39.759Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "66f0a1c2e4b0a1b2c3d4e607"
+    },
+    "userId": {
+      "$oid": "66f0a1c2e4b0a1b2c3d4e006"
+    },
+    "clubs": [
+      {
+        "code": "driver",
+        "label": "Driver",
+        "inBag": true,
+        "stats": {
+          "shotCount": 25,
+          "averageMetres": 171,
+          "longestMetres": 188,
+          "spreadMetres": 9
+        }
+      },
+      {
+        "code": "3w",
+        "label": "3 wood",
+        "inBag": true,
+        "stats": {
+          "shotCount": 16,
+          "averageMetres": 158,
+          "longestMetres": 191,
+          "spreadMetres": 11
+        }
+      },
+      {
+        "code": "5w",
+        "label": "5 wood",
+        "inBag": true,
+        "stats": {
+          "shotCount": 9,
+          "averageMetres": 143,
+          "longestMetres": 146,
+          "spreadMetres": 2
+        }
+      },
+      {
+        "code": "4h",
+        "label": "4 hybrid",
+        "inBag": true,
+        "stats": {
+          "shotCount": 11,
+          "averageMetres": 133,
+          "longestMetres": 136,
+          "spreadMetres": 3
+        }
+      },
+      {
+        "code": "5i",
+        "label": "5 iron",
+        "inBag": true,
+        "stats": {
+          "shotCount": 3,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      },
+      {
+        "code": "6i",
+        "label": "6 iron",
+        "inBag": true,
+        "stats": {
+          "shotCount": 2,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      },
+      {
+        "code": "7i",
+        "label": "7 iron",
+        "inBag": true,
+        "stats": {
+          "shotCount": 2,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      },
+      {
+        "code": "8i",
+        "label": "8 iron",
+        "inBag": true,
+        "stats": {
+          "shotCount": 2,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      },
+      {
+        "code": "9i",
+        "label": "9 iron",
+        "inBag": true,
+        "stats": {
+          "shotCount": 4,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      },
+      {
+        "code": "pw",
+        "label": "Pitching wedge",
+        "inBag": true,
+        "stats": {
+          "shotCount": 2,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      },
+      {
+        "code": "gw",
+        "label": "Gap wedge",
+        "inBag": true,
+        "stats": {
+          "shotCount": 2,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      },
+      {
+        "code": "sw",
+        "label": "Sand wedge",
+        "inBag": true,
+        "stats": {
+          "shotCount": 0,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      },
+      {
+        "code": "lw",
+        "label": "Lob wedge",
+        "inBag": true,
+        "stats": {
+          "shotCount": 0,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      },
+      {
+        "code": "putter",
+        "label": "Putter",
+        "inBag": true,
+        "stats": {
+          "shotCount": 0,
+          "averageMetres": null,
+          "longestMetres": null,
+          "spreadMetres": null
+        }
+      }
+    ],
+    "recalculatedAt": {
+      "$date": "2026-10-29T09:01:43.567Z"
+    },
+    "createdAt": {
+      "$date": "2026-10-01T06:00:00Z"
+    },
+    "updatedAt": {
+      "$date": "2026-10-29T09:01:43.567Z"
+    }
+  }
+]

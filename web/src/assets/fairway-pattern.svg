@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240">
+  <!-- Mown-fairway stripes with a subtle contour line, used as the login/hero background -->
+  <rect width="240" height="240" fill="#006A4E"/>
+  <g fill="#007A5A">
+    <rect x="0" y="0" width="40" height="240"/>
+    <rect x="80" y="0" width="40" height="240"/>
+    <rect x="160" y="0" width="40" height="240"/>
+  </g>
+  <g fill="none" stroke="#A0D6B4" stroke-width="1" opacity=".18">
+    <path d="M-10 60c40-20 80 20 120 0s80-20 140 0"/>
+    <path d="M-10 120c40-20 80 20 120 0s80-20 140 0"/>
+    <path d="M-10 180c40-20 80 20 120 0s80-20 140 0"/>
+  </g>
+</svg>

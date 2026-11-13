@@ -1,0 +1,9 @@
+{
+  "success": false,
+  "error": {
+    "status": 403,
+    "code": "FORBIDDEN",
+    "message": "You can only view your own statistics.",
+    "requestId": "req_91b0de"
+  }
+}

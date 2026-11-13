@@ -1,0 +1,328 @@
+$ mongosh "mongodb://127.0.0.1:27017/budget_golfers" seed/check-database.mongosh.js
+
+> 1. Collections
+  db.getCollectionNames()
+[
+  'clubs',
+  'courses',
+  'rounds',
+  'users'
+]
+
+> 2. Documents in each collection
+  db.<collection>.countDocuments()
+{
+  users: 8,
+  courses: 15,
+  rounds: 107,
+  clubs: 7
+}
+
+> 3. Indexes (A2 Table 11)
+  db.<collection>.getIndexes()
+  users:
+    {"_id":1}
+    {"email":1}  unique
+    {"preferences.showOnLeaderboard":1,"statsSnapshot.averageScoreLast20":1}
+  rounds:
+    {"_id":1}
+    {"userId":1,"playedAt":-1}
+    {"userId":1,"course.courseId":1,"playedAt":-1}
+    {"userId":1,"clientRoundId":1}  unique  partial {"clientRoundId":{"$type":"string"}}
+    {"holesPlayed":1,"playedAt":-1}
+  courses:
+    {"_id":1}
+    {"createdBy":1,"slug":1}  unique
+    {"_fts":"text","_ftsx":1}
+    {"location":"2dsphere"}
+  clubs:
+    {"_id":1}
+    {"userId":1}  unique
+
+> 4. One user (password hash hidden)
+  db.users.findOne({ email: 'aroha.m@example.com' }, { passwordHash: 0 })
+{
+  _id: ObjectId('66f0a1c2e4b0a1b2c3d4e5f6'),
+  email: 'aroha.m@example.com',
+  displayName: 'Aroha M.',
+  role: 'golfer',
+  homeCourseId: ObjectId('66e9b7d1a2c3d4e5f6a7b8c9'),
+  preferences: {
+    units: 'metric',
+    theme: 'light',
+    showOnLeaderboard: true
+  },
+  statsSnapshot: {
+    roundsPlayed: 32,
+    averageScoreLast20: 89.6,
+    averageScorePrev20: 94.8,
+    bestScore: 84,
+    handicapEstimate: 15.1,
+    lastRoundAt: ISODate('2026-10-31T00:00:00.000Z')
+  },
+  devices: [
+    {
+      deviceId: 'app-7d2e41',
+      platform: 'android',
+      lastSyncAt: ISODate('2026-10-31T06:13:26.543Z')
+    }
+  ],
+  createdAt: ISODate('2025-10-18T08:30:00.000Z'),
+  updatedAt: ISODate('2026-10-31T06:13:26.543Z')
+}
+
+> 5. Passwords are stored as bcrypt hashes
+  db.users.find({}, { email: 1, passwordHash: 1 }).limit(3)
+  aroha.m@example.com    $2a$12$... (60 chars)
+  tane.w@example.com     $2a$12$... (60 chars)
+  mei.l@example.com      $2a$12$... (60 chars)
+
+> 6. The A2 example round, first two holes
+  db.rounds.findOne({ _id: ObjectId('66f2c9e0b1a2c3d4e5f60718') }, { holes: { $slice: 2 } })
+{
+  _id: ObjectId('66f2c9e0b1a2c3d4e5f60718'),
+  userId: ObjectId('66f0a1c2e4b0a1b2c3d4e5f6'),
+  source: 'mobile-app',
+  course: {
+    courseId: ObjectId('66e9b7d1a2c3d4e5f6a7b8c9'),
+    name: 'Omanu Golf Club',
+    par: 72
+  },
+  tee: 'Yellow',
+  playedAt: ISODate('2026-09-12T02:10:00.000Z'),
+  holesPlayed: 18,
+  totals: {
+    strokes: 84,
+    toPar: 12,
+    putts: 31,
+    penalties: 0,
+    fairwaysHit: 3,
+    fairwaysPossible: 14,
+    greensInRegulation: 8
+  },
+  holes: [
+    {
+      number: 1,
+      par: 4,
+      distanceMetres: 352,
+      strokes: 5,
+      putts: 2,
+      penalties: 0,
+      fairwayHit: true,
+      shots: [
+        {
+          seq: 1,
+          club: 'driver',
+          start: {
+            type: 'Point',
+            coordinates: [
+              176.225887,
+              -37.672984
+            ]
+          },
+          end: {
+            type: 'Point',
+            coordinates: [
+              176.227665,
+              -37.671633
+            ]
+          },
+          result: 'fairway',
+          distanceMetres: 217
+        },
+        {
+          seq: 2,
+          club: '9i',
+          start: {
+            type: 'Point',
+            coordinates: [
+              176.227665,
+              -37.671633
+            ]
+          },
+          end: {
+            type: 'Point',
+            coordinates: [
+              176.228629,
+              -37.670908
+            ]
+          },
+          result: 'fairway',
+          distanceMetres: 117
+        },
+        {
+          seq: 3,
+          club: 'sw',
+          start: {
+            type: 'Point',
+            coordinates: [
+              176.228629,
+              -37.670908
+            ]
+          },
+          end: {
+            type: 'Point',
+            coordinates: [
+              176.228752,
+              -37.670815
+            ]
+          },
+          result: 'green',
+          distanceMetres: 15
+        }
+      ],
+      teeClub: 'driver',
+      greenInRegulation: false
+    },
+    {
+      number: 2,
+      par: 3,
+      distanceMetres: 148,
+      strokes: 5,
+      putts: 2,
+      penalties: 0,
+      shots: [
+        {
+          seq: 1,
+          club: '8i',
+          start: {
+            type: 'Point',
+            coordinates: [
+              176.226691,
+              -37.67533
+            ]
+          },
+          end: {
+            type: 'Point',
+            coordinates: [
+              176.228151,
+              -37.675229
+            ]
+          },
+          result: 'rough-left',
+          distanceMetres: 129
+        },
+        {
+          seq: 2,
+          club: 'sw',
+          start: {
+            type: 'Point',
+            coordinates: [
+              176.228151,
+              -37.675229
+            ]
+          },
+          end: {
+            type: 'Point',
+            coordinates: [
+              176.228299,
+              -37.675233
+            ]
+          },
+          result: 'green',
+          distanceMetres: 13
+        },
+        {
+          seq: 3,
+          club: 'sw',
+          start: {
+            type: 'Point',
+            coordinates: [
+              176.228299,
+              -37.675233
+            ]
+          },
+          end: {
+            type: 'Point',
+            coordinates: [
+              176.228401,
+              -37.675238
+            ]
+          },
+          result: 'green',
+          distanceMetres: 9
+        }
+      ],
+      teeClub: '8i',
+      greenInRegulation: false
+    }
+  ],
+  createdAt: ISODate('2026-09-12T21:17:03.293Z'),
+  updatedAt: ISODate('2026-09-12T21:17:03.293Z'),
+  clientRoundId: 'a3f1c9e2-5b7d-4e8a-9c1f-2d6b8e4a7c10',
+  notes: 'Windy back nine'
+}
+
+> 7. Aroha's five most recent rounds (uses index userId_1_playedAt_-1)
+  db.rounds.find({ userId: AROHA }, { playedAt: 1, 'course.name': 1, holesPlayed: 1, 'totals.strokes': 1 }).sort({ playedAt: -1 }).limit(5)
+  2026-10-31  Omanu Golf Club      18 holes  94
+  2026-10-23  Omanu Golf Club      18 holes  87
+  2026-10-17  Omanu Golf Club      18 holes  85
+  2026-10-11  Omanu Golf Club      18 holes  91
+  2026-09-30  Omanu Golf Club      18 holes  89
+  index used: userId_1_playedAt_-1; documents examined: 5
+
+> 8. Leaderboard aggregation (season, 18-hole rounds, at least 3)
+  db.rounds.aggregate([$match, $group, $match, $lookup, $sort])
+  Tane W.     21 rounds  average 77.2
+  Mei L.      15 rounds  average 84.6
+  Priya R.    12 rounds  average 87.2
+  Aroha M.    25 rounds  average 90.2
+  Sam K.       7 rounds  average 94.4
+
+> 9. Club distances for Aroha (clubs collection)
+  db.clubs.findOne({ userId: AROHA }).clubs.slice(0, 5)
+  Driver   shots 370  average 212 m  longest 258 m
+  3 wood   shots   3  average null m  longest null m
+  5 wood   shots  17  average 176 m  longest 181 m
+  4 hybrid shots  15  average 163 m  longest 169 m
+  4 iron   shots   0  average null m  longest null m
+
+> 10. Self-named course without a location
+  db.courses.findOne({ name: 'Pāpāmoa Muni 9' }, { name: 1, slug: 1, location: 1, 'holes.par': 1 })
+{
+  name: 'Pāpāmoa Muni 9',
+  slug: 'papamoa-muni-9',
+  holes: [
+    {
+      par: 4
+    },
+    {
+      par: 3
+    },
+    {
+      par: 4
+    },
+    {
+      par: 4
+    },
+    {
+      par: 3
+    },
+    {
+      par: 5
+    },
+    {
+      par: 4
+    },
+    {
+      par: 3
+    },
+    {
+      par: 4
+    }
+  ]
+}
+
+> 11. A repeat upload is blocked by the unique index
+  db.rounds.insertOne({ userId: AROHA, clientRoundId: 'a3f1c9e2-5b7d-4e8a-9c1f-2d6b8e4a7c10' })
+  refused: 11000 E11000 duplicate key error collection: budget_golfers.rounds index: userId_1_clientRoundId_1 dup key: { userId
+
+> 12. A second account with the same email is blocked
+  db.users.insertOne({ email: 'aroha.m@example.com' })
+  refused: 11000
+
+> 13. Courses within 5 km of a point (2dsphere index, $geoNear)
+  db.courses.aggregate([{ $geoNear: { near: [176.22, -37.67], maxDistance: 5000 } }, { $group: ... }])
+  Omanu Golf Club: 548 m away, saved by 6 golfers
+  courses with no location (self-named): 9

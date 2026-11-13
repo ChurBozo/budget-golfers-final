@@ -1,0 +1,2576 @@
+[
+  {
+    "_id": {
+      "$oid": "66e9b7d1a2c3d4e5f6a7b8c9"
+    },
+    "name": "Omanu Golf Club",
+    "slug": "omanu-golf-club",
+    "createdBy": {
+      "$oid": "66f0a1c2e4b0a1b2c3d4e5f6"
+    },
+    "tees": [
+      {
+        "name": "Yellow",
+        "par": 72,
+        "totalMetres": 5892,
+        "courseRating": 69.8,
+        "slopeRating": 121
+      },
+      {
+        "name": "White",
+        "par": 72,
+        "totalMetres": 6216,
+        "courseRating": 71.2,
+        "slopeRating": 125
+      }
+    ],
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "metres": {
+          "Yellow": 352,
+          "White": 371
+        },
+        "strokeIndex": 7
+      },
+      {
+        "number": 2,
+        "par": 3,
+        "metres": {
+          "Yellow": 148,
+          "White": 156
+        },
+        "strokeIndex": 17
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "metres": {
+          "Yellow": 338,
+          "White": 357
+        },
+        "strokeIndex": 3
+      },
+      {
+        "number": 4,
+        "par": 5,
+        "metres": {
+          "Yellow": 452,
+          "White": 477
+        },
+        "strokeIndex": 11
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "metres": {
+          "Yellow": 371,
+          "White": 391
+        },
+        "strokeIndex": 1
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "metres": {
+          "Yellow": 318,
+          "White": 335
+        },
+        "strokeIndex": 13
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "metres": {
+          "Yellow": 345,
+          "White": 364
+        },
+        "strokeIndex": 5
+      },
+      {
+        "number": 8,
+        "par": 3,
+        "metres": {
+          "Yellow": 161,
+          "White": 170
+        },
+        "strokeIndex": 15
+      },
+      {
+        "number": 9,
+        "par": 5,
+        "metres": {
+          "Yellow": 470,
+          "White": 496
+        },
+        "strokeIndex": 9
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "metres": {
+          "Yellow": 330,
+          "White": 348
+        },
+        "strokeIndex": 8
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "metres": {
+          "Yellow": 362,
+          "White": 382
+        },
+        "strokeIndex": 4
+      },
+      {
+        "number": 12,
+        "par": 3,
+        "metres": {
+          "Yellow": 139,
+          "White": 147
+        },
+        "strokeIndex": 18
+      },
+      {
+        "number": 13,
+        "par": 5,
+        "metres": {
+          "Yellow": 447,
+          "White": 472
+        },
+        "strokeIndex": 12
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "metres": {
+          "Yellow": 381,
+          "White": 402
+        },
+        "strokeIndex": 2
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "metres": {
+          "Yellow": 322,
+          "White": 340
+        },
+        "strokeIndex": 10
+      },
+      {
+        "number": 16,
+        "par": 3,
+        "metres": {
+          "Yellow": 152,
+          "White": 160
+        },
+        "strokeIndex": 16
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "metres": {
+          "Yellow": 341,
+          "White": 360
+        },
+        "strokeIndex": 6
+      },
+      {
+        "number": 18,
+        "par": 5,
+        "metres": {
+          "Yellow": 463,
+          "White": 488
+        },
+        "strokeIndex": 14
+      }
+    ],
+    "createdAt": {
+      "$date": "2025-10-18T08:30:00Z"
+    },
+    "updatedAt": {
+      "$date": "2025-10-18T08:30:00Z"
+    },
+    "region": "Bay of Plenty",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        176.2238,
+        -37.6739
+      ]
+    }
+  },
+  {
+    "_id": {
+      "$oid": "66e9b7d1a2c3d4e5f6a7b8ca"
+    },
+    "name": "Tauranga Golf Club",
+    "slug": "tauranga-golf-club",
+    "createdBy": {
+      "$oid": "66f0a1c2e4b0a1b2c3d4e5f6"
+    },
+    "tees": [
+      {
+        "name": "Yellow",
+        "par": 71,
+        "totalMetres": 5691
+      },
+      {
+        "name": "White",
+        "par": 71,
+        "totalMetres": 5976
+      }
+    ],
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "metres": {
+          "Yellow": 341,
+          "White": 358
+        },
+        "strokeIndex": 5
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "metres": {
+          "Yellow": 322,
+          "White": 338
+        },
+        "strokeIndex": 9
+      },
+      {
+        "number": 3,
+        "par": 3,
+        "metres": {
+          "Yellow": 156,
+          "White": 164
+        },
+        "strokeIndex": 15
+      },
+      {
+        "number": 4,
+        "par": 5,
+        "metres": {
+          "Yellow": 455,
+          "White": 478
+        },
+        "strokeIndex": 3
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "metres": {
+          "Yellow": 389,
+          "White": 408
+        },
+        "strokeIndex": 1
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "metres": {
+          "Yellow": 301,
+          "White": 316
+        },
+        "strokeIndex": 11
+      },
+      {
+        "number": 7,
+        "par": 3,
+        "metres": {
+          "Yellow": 133,
+          "White": 140
+        },
+        "strokeIndex": 17
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "metres": {
+          "Yellow": 356,
+          "White": 374
+        },
+        "strokeIndex": 7
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "metres": {
+          "Yellow": 318,
+          "White": 334
+        },
+        "strokeIndex": 13
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "metres": {
+          "Yellow": 344,
+          "White": 361
+        },
+        "strokeIndex": 6
+      },
+      {
+        "number": 11,
+        "par": 5,
+        "metres": {
+          "Yellow": 470,
+          "White": 494
+        },
+        "strokeIndex": 2
+      },
+      {
+        "number": 12,
+        "par": 3,
+        "metres": {
+          "Yellow": 167,
+          "White": 175
+        },
+        "strokeIndex": 16
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "metres": {
+          "Yellow": 312,
+          "White": 328
+        },
+        "strokeIndex": 10
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "metres": {
+          "Yellow": 377,
+          "White": 396
+        },
+        "strokeIndex": 4
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "metres": {
+          "Yellow": 329,
+          "White": 345
+        },
+        "strokeIndex": 12
+      },
+      {
+        "number": 16,
+        "par": 3,
+        "metres": {
+          "Yellow": 142,
+          "White": 149
+        },
+        "strokeIndex": 18
+      },
+      {
+        "number": 17,
+        "par": 5,
+        "metres": {
+          "Yellow": 448,
+          "White": 470
+        },
+        "strokeIndex": 8
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "metres": {
+          "Yellow": 331,
+          "White": 348
+        },
+        "strokeIndex": 14
+      }
+    ],
+    "createdAt": {
+      "$date": "2025-10-18T08:30:00Z"
+    },
+    "updatedAt": {
+      "$date": "2025-10-18T08:30:00Z"
+    },
+    "region": "Bay of Plenty"
+  },
+  {
+    "_id": {
+      "$oid": "66e9b7d1a2c3d4e5f6a7b902"
+    },
+    "name": "Pāpāmoa Muni 9",
+    "slug": "papamoa-muni-9",
+    "createdBy": {
+      "$oid": "66f0a1c2e4b0a1b2c3d4e5f6"
+    },
+    "tees": [
+      {
+        "name": "Yellow",
+        "totalMetres": 2217
+      }
+    ],
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "metres": {
+          "Yellow": 298
+        }
+      },
+      {
+        "number": 2,
+        "par": 3,
+        "metres": {
+          "Yellow": 121
+        }
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "metres": {
+          "Yellow": 276
+        }
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "metres": {
+          "Yellow": 305
+        }
+      },
+      {
+        "number": 5,
+        "par": 3,
+        "metres": {
+          "Yellow": 140
+        }
+      },
+      {
+        "number": 6,
+        "par": 5,
+        "metres": {
+          "Yellow": 418
+        }
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "metres": {
+          "Yellow": 288
+        }
+      },
+      {
+        "number": 8,
+        "par": 3,
+        "metres": {
+          "Yellow": 109
+        }
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "metres": {
+          "Yellow": 262
+        }
+      }
+    ],
+    "createdAt": {
+      "$date": "2025-10-18T08:30:00Z"
+    },
+    "updatedAt": {
+      "$date": "2025-10-18T08:30:00Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "66e9b7d1a2c3d4e5f6a7b903"
+    },
+    "name": "Tauranga Golf Club",
+    "slug": "tauranga-golf-club",
+    "createdBy": {
+      "$oid": "66f0a1c2e4b0a1b2c3d4e001"
+    },
+    "tees": [
+      {
+        "name": "Yellow",
+        "par": 71,
+        "totalMetres": 5691
+      },
+      {
+        "name": "White",
+        "par": 71,
+        "totalMetres": 5976
+      }
+    ],
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "metres": {
+          "Yellow": 341,
+          "White": 358
+        },
+        "strokeIndex": 5
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "metres": {
+          "Yellow": 322,
+          "White": 338
+        },
+        "strokeIndex": 9
+      },
+      {
+        "number": 3,
+        "par": 3,
+        "metres": {
+          "Yellow": 156,
+          "White": 164
+        },
+        "strokeIndex": 15
+      },
+      {
+        "number": 4,
+        "par": 5,
+        "metres": {
+          "Yellow": 455,
+          "White": 478
+        },
+        "strokeIndex": 3
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "metres": {
+          "Yellow": 389,
+          "White": 408
+        },
+        "strokeIndex": 1
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "metres": {
+          "Yellow": 301,
+          "White": 316
+        },
+        "strokeIndex": 11
+      },
+      {
+        "number": 7,
+        "par": 3,
+        "metres": {
+          "Yellow": 133,
+          "White": 140
+        },
+        "strokeIndex": 17
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "metres": {
+          "Yellow": 356,
+          "White": 374
+        },
+        "strokeIndex": 7
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "metres": {
+          "Yellow": 318,
+          "White": 334
+        },
+        "strokeIndex": 13
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "metres": {
+          "Yellow": 344,
+          "White": 361
+        },
+        "strokeIndex": 6
+      },
+      {
+        "number": 11,
+        "par": 5,
+        "metres": {
+          "Yellow": 470,
+          "White": 494
+        },
+        "strokeIndex": 2
+      },
+      {
+        "number": 12,
+        "par": 3,
+        "metres": {
+          "Yellow": 167,
+          "White": 175
+        },
+        "strokeIndex": 16
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "metres": {
+          "Yellow": 312,
+          "White": 328
+        },
+        "strokeIndex": 10
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "metres": {
+          "Yellow": 377,
+          "White": 396
+        },
+        "strokeIndex": 4
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "metres": {
+          "Yellow": 329,
+          "White": 345
+        },
+        "strokeIndex": 12
+      },
+      {
+        "number": 16,
+        "par": 3,
+        "metres": {
+          "Yellow": 142,
+          "White": 149
+        },
+        "strokeIndex": 18
+      },
+      {
+        "number": 17,
+        "par": 5,
+        "metres": {
+          "Yellow": 448,
+          "White": 470
+        },
+        "strokeIndex": 8
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "metres": {
+          "Yellow": 331,
+          "White": 348
+        },
+        "strokeIndex": 14
+      }
+    ],
+    "createdAt": {
+      "$date": "2025-10-25T05:00:00Z"
+    },
+    "updatedAt": {
+      "$date": "2025-10-25T05:00:00Z"
+    },
+    "region": "Bay of Plenty"
+  },
+  {
+    "_id": {
+      "$oid": "66e9b7d1a2c3d4e5f6a7b904"
+    },
+    "name": "Omanu Golf Club",
+    "slug": "omanu-golf-club",
+    "createdBy": {
+      "$oid": "66f0a1c2e4b0a1b2c3d4e001"
+    },
+    "tees": [
+      {
+        "name": "Yellow",
+        "par": 72,
+        "totalMetres": 5892,
+        "courseRating": 69.8,
+        "slopeRating": 121
+      },
+      {
+        "name": "White",
+        "par": 72,
+        "totalMetres": 6216,
+        "courseRating": 71.2,
+        "slopeRating": 125
+      }
+    ],
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "metres": {
+          "Yellow": 352,
+          "White": 371
+        },
+        "strokeIndex": 7
+      },
+      {
+        "number": 2,
+        "par": 3,
+        "metres": {
+          "Yellow": 148,
+          "White": 156
+        },
+        "strokeIndex": 17
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "metres": {
+          "Yellow": 338,
+          "White": 357
+        },
+        "strokeIndex": 3
+      },
+      {
+        "number": 4,
+        "par": 5,
+        "metres": {
+          "Yellow": 452,
+          "White": 477
+        },
+        "strokeIndex": 11
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "metres": {
+          "Yellow": 371,
+          "White": 391
+        },
+        "strokeIndex": 1
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "metres": {
+          "Yellow": 318,
+          "White": 335
+        },
+        "strokeIndex": 13
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "metres": {
+          "Yellow": 345,
+          "White": 364
+        },
+        "strokeIndex": 5
+      },
+      {
+        "number": 8,
+        "par": 3,
+        "metres": {
+          "Yellow": 161,
+          "White": 170
+        },
+        "strokeIndex": 15
+      },
+      {
+        "number": 9,
+        "par": 5,
+        "metres": {
+          "Yellow": 470,
+          "White": 496
+        },
+        "strokeIndex": 9
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "metres": {
+          "Yellow": 330,
+          "White": 348
+        },
+        "strokeIndex": 8
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "metres": {
+          "Yellow": 362,
+          "White": 382
+        },
+        "strokeIndex": 4
+      },
+      {
+        "number": 12,
+        "par": 3,
+        "metres": {
+          "Yellow": 139,
+          "White": 147
+        },
+        "strokeIndex": 18
+      },
+      {
+        "number": 13,
+        "par": 5,
+        "metres": {
+          "Yellow": 447,
+          "White": 472
+        },
+        "strokeIndex": 12
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "metres": {
+          "Yellow": 381,
+          "White": 402
+        },
+        "strokeIndex": 2
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "metres": {
+          "Yellow": 322,
+          "White": 340
+        },
+        "strokeIndex": 10
+      },
+      {
+        "number": 16,
+        "par": 3,
+        "metres": {
+          "Yellow": 152,
+          "White": 160
+        },
+        "strokeIndex": 16
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "metres": {
+          "Yellow": 341,
+          "White": 360
+        },
+        "strokeIndex": 6
+      },
+      {
+        "number": 18,
+        "par": 5,
+        "metres": {
+          "Yellow": 463,
+          "White": 488
+        },
+        "strokeIndex": 14
+      }
+    ],
+    "createdAt": {
+      "$date": "2025-10-25T05:00:00Z"
+    },
+    "updatedAt": {
+      "$date": "2025-10-25T05:00:00Z"
+    },
+    "region": "Bay of Plenty",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        176.2238,
+        -37.6739
+      ]
+    }
+  },
+  {
+    "_id": {
+      "$oid": "66e9b7d1a2c3d4e5f6a7b905"
+    },
+    "name": "Mount Maunganui Golf Club",
+    "slug": "mount-maunganui-golf-club",
+    "createdBy": {
+      "$oid": "66f0a1c2e4b0a1b2c3d4e001"
+    },
+    "tees": [
+      {
+        "name": "Yellow",
+        "par": 70,
+        "totalMetres": 5478
+      }
+    ],
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "metres": {
+          "Yellow": 361
+        },
+        "strokeIndex": 3
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "metres": {
+          "Yellow": 312
+        },
+        "strokeIndex": 9
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "metres": {
+          "Yellow": 377
+        },
+        "strokeIndex": 1
+      },
+      {
+        "number": 4,
+        "par": 3,
+        "metres": {
+          "Yellow": 141
+        },
+        "strokeIndex": 15
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "metres": {
+          "Yellow": 299
+        },
+        "strokeIndex": 11
+      },
+      {
+        "number": 6,
+        "par": 5,
+        "metres": {
+          "Yellow": 451
+        },
+        "strokeIndex": 5
+      },
+      {
+        "number": 7,
+        "par": 3,
+        "metres": {
+          "Yellow": 158
+        },
+        "strokeIndex": 17
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "metres": {
+          "Yellow": 335
+        },
+        "strokeIndex": 7
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "metres": {
+          "Yellow": 327
+        },
+        "strokeIndex": 13
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "metres": {
+          "Yellow": 346
+        },
+        "strokeIndex": 4
+      },
+      {
+        "number": 11,
+        "par": 3,
+        "metres": {
+          "Yellow": 150
+        },
+        "strokeIndex": 16
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "metres": {
+          "Yellow": 318
+        },
+        "strokeIndex": 8
+      },
+      {
+        "number": 13,
+        "par": 5,
+        "metres": {
+          "Yellow": 462
+        },
+        "strokeIndex": 2
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "metres": {
+          "Yellow": 301
+        },
+        "strokeIndex": 10
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "metres": {
+          "Yellow": 368
+        },
+        "strokeIndex": 6
+      },
+      {
+        "number": 16,
+        "par": 3,
+        "metres": {
+          "Yellow": 128
+        },
+        "strokeIndex": 18
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "metres": {
+          "Yellow": 334
+        },
+        "strokeIndex": 12
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "metres": {
+          "Yellow": 310
+        },
+        "strokeIndex": 14
+      }
+    ],
+    "createdAt": {
+      "$date": "2025-10-25T05:00:00Z"
+    },
+    "updatedAt": {
+      "$date": "2025-10-25T05:00:00Z"
+    },
+    "region": "Bay of Plenty"
+  },
+  {
+    "_id": {
+      "$oid": "66e9b7d1a2c3d4e5f6a7b906"
+    },
+    "name": "Omanu Golf Club",
+    "slug": "omanu-golf-club",
+    "createdBy": {
+      "$oid": "66f0a1c2e4b0a1b2c3d4e002"
+    },
+    "tees": [
+      {
+        "name": "Yellow",
+        "par": 72,
+        "totalMetres": 5892,
+        "courseRating": 69.8,
+        "slopeRating": 121
+      },
+      {
+        "name": "White",
+        "par": 72,
+        "totalMetres": 6216,
+        "courseRating": 71.2,
+        "slopeRating": 125
+      }
+    ],
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "metres": {
+          "Yellow": 352,
+          "White": 371
+        },
+        "strokeIndex": 7
+      },
+      {
+        "number": 2,
+        "par": 3,
+        "metres": {
+          "Yellow": 148,
+          "White": 156
+        },
+        "strokeIndex": 17
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "metres": {
+          "Yellow": 338,
+          "White": 357
+        },
+        "strokeIndex": 3
+      },
+      {
+        "number": 4,
+        "par": 5,
+        "metres": {
+          "Yellow": 452,
+          "White": 477
+        },
+        "strokeIndex": 11
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "metres": {
+          "Yellow": 371,
+          "White": 391
+        },
+        "strokeIndex": 1
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "metres": {
+          "Yellow": 318,
+          "White": 335
+        },
+        "strokeIndex": 13
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "metres": {
+          "Yellow": 345,
+          "White": 364
+        },
+        "strokeIndex": 5
+      },
+      {
+        "number": 8,
+        "par": 3,
+        "metres": {
+          "Yellow": 161,
+          "White": 170
+        },
+        "strokeIndex": 15
+      },
+      {
+        "number": 9,
+        "par": 5,
+        "metres": {
+          "Yellow": 470,
+          "White": 496
+        },
+        "strokeIndex": 9
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "metres": {
+          "Yellow": 330,
+          "White": 348
+        },
+        "strokeIndex": 8
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "metres": {
+          "Yellow": 362,
+          "White": 382
+        },
+        "strokeIndex": 4
+      },
+      {
+        "number": 12,
+        "par": 3,
+        "metres": {
+          "Yellow": 139,
+          "White": 147
+        },
+        "strokeIndex": 18
+      },
+      {
+        "number": 13,
+        "par": 5,
+        "metres": {
+          "Yellow": 447,
+          "White": 472
+        },
+        "strokeIndex": 12
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "metres": {
+          "Yellow": 381,
+          "White": 402
+        },
+        "strokeIndex": 2
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "metres": {
+          "Yellow": 322,
+          "White": 340
+        },
+        "strokeIndex": 10
+      },
+      {
+        "number": 16,
+        "par": 3,
+        "metres": {
+          "Yellow": 152,
+          "White": 160
+        },
+        "strokeIndex": 16
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "metres": {
+          "Yellow": 341,
+          "White": 360
+        },
+        "strokeIndex": 6
+      },
+      {
+        "number": 18,
+        "par": 5,
+        "metres": {
+          "Yellow": 463,
+          "White": 488
+        },
+        "strokeIndex": 14
+      }
+    ],
+    "createdAt": {
+      "$date": "2025-11-02T04:00:00Z"
+    },
+    "updatedAt": {
+      "$date": "2025-11-02T04:00:00Z"
+    },
+    "region": "Bay of Plenty",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        176.2238,
+        -37.6739
+      ]
+    }
+  },
+  {
+    "_id": {
+      "$oid": "66e9b7d1a2c3d4e5f6a7b907"
+    },
+    "name": "Mount Maunganui Golf Club",
+    "slug": "mount-maunganui-golf-club",
+    "createdBy": {
+      "$oid": "66f0a1c2e4b0a1b2c3d4e002"
+    },
+    "tees": [
+      {
+        "name": "Yellow",
+        "par": 70,
+        "totalMetres": 5478
+      }
+    ],
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "metres": {
+          "Yellow": 361
+        },
+        "strokeIndex": 3
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "metres": {
+          "Yellow": 312
+        },
+        "strokeIndex": 9
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "metres": {
+          "Yellow": 377
+        },
+        "strokeIndex": 1
+      },
+      {
+        "number": 4,
+        "par": 3,
+        "metres": {
+          "Yellow": 141
+        },
+        "strokeIndex": 15
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "metres": {
+          "Yellow": 299
+        },
+        "strokeIndex": 11
+      },
+      {
+        "number": 6,
+        "par": 5,
+        "metres": {
+          "Yellow": 451
+        },
+        "strokeIndex": 5
+      },
+      {
+        "number": 7,
+        "par": 3,
+        "metres": {
+          "Yellow": 158
+        },
+        "strokeIndex": 17
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "metres": {
+          "Yellow": 335
+        },
+        "strokeIndex": 7
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "metres": {
+          "Yellow": 327
+        },
+        "strokeIndex": 13
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "metres": {
+          "Yellow": 346
+        },
+        "strokeIndex": 4
+      },
+      {
+        "number": 11,
+        "par": 3,
+        "metres": {
+          "Yellow": 150
+        },
+        "strokeIndex": 16
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "metres": {
+          "Yellow": 318
+        },
+        "strokeIndex": 8
+      },
+      {
+        "number": 13,
+        "par": 5,
+        "metres": {
+          "Yellow": 462
+        },
+        "strokeIndex": 2
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "metres": {
+          "Yellow": 301
+        },
+        "strokeIndex": 10
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "metres": {
+          "Yellow": 368
+        },
+        "strokeIndex": 6
+      },
+      {
+        "number": 16,
+        "par": 3,
+        "metres": {
+          "Yellow": 128
+        },
+        "strokeIndex": 18
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "metres": {
+          "Yellow": 334
+        },
+        "strokeIndex": 12
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "metres": {
+          "Yellow": 310
+        },
+        "strokeIndex": 14
+      }
+    ],
+    "createdAt": {
+      "$date": "2025-11-02T04:00:00Z"
+    },
+    "updatedAt": {
+      "$date": "2025-11-02T04:00:00Z"
+    },
+    "region": "Bay of Plenty"
+  },
+  {
+    "_id": {
+      "$oid": "66e9b7d1a2c3d4e5f6a7b908"
+    },
+    "name": "Mount Maunganui Golf Club",
+    "slug": "mount-maunganui-golf-club",
+    "createdBy": {
+      "$oid": "66f0a1c2e4b0a1b2c3d4e003"
+    },
+    "tees": [
+      {
+        "name": "Yellow",
+        "par": 70,
+        "totalMetres": 5478
+      }
+    ],
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "metres": {
+          "Yellow": 361
+        },
+        "strokeIndex": 3
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "metres": {
+          "Yellow": 312
+        },
+        "strokeIndex": 9
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "metres": {
+          "Yellow": 377
+        },
+        "strokeIndex": 1
+      },
+      {
+        "number": 4,
+        "par": 3,
+        "metres": {
+          "Yellow": 141
+        },
+        "strokeIndex": 15
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "metres": {
+          "Yellow": 299
+        },
+        "strokeIndex": 11
+      },
+      {
+        "number": 6,
+        "par": 5,
+        "metres": {
+          "Yellow": 451
+        },
+        "strokeIndex": 5
+      },
+      {
+        "number": 7,
+        "par": 3,
+        "metres": {
+          "Yellow": 158
+        },
+        "strokeIndex": 17
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "metres": {
+          "Yellow": 335
+        },
+        "strokeIndex": 7
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "metres": {
+          "Yellow": 327
+        },
+        "strokeIndex": 13
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "metres": {
+          "Yellow": 346
+        },
+        "strokeIndex": 4
+      },
+      {
+        "number": 11,
+        "par": 3,
+        "metres": {
+          "Yellow": 150
+        },
+        "strokeIndex": 16
+      },
+      {
+        "number": 12,
+        "par": 4,
+        "metres": {
+          "Yellow": 318
+        },
+        "strokeIndex": 8
+      },
+      {
+        "number": 13,
+        "par": 5,
+        "metres": {
+          "Yellow": 462
+        },
+        "strokeIndex": 2
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "metres": {
+          "Yellow": 301
+        },
+        "strokeIndex": 10
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "metres": {
+          "Yellow": 368
+        },
+        "strokeIndex": 6
+      },
+      {
+        "number": 16,
+        "par": 3,
+        "metres": {
+          "Yellow": 128
+        },
+        "strokeIndex": 18
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "metres": {
+          "Yellow": 334
+        },
+        "strokeIndex": 12
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "metres": {
+          "Yellow": 310
+        },
+        "strokeIndex": 14
+      }
+    ],
+    "createdAt": {
+      "$date": "2026-02-10T06:00:00Z"
+    },
+    "updatedAt": {
+      "$date": "2026-02-10T06:00:00Z"
+    },
+    "region": "Bay of Plenty"
+  },
+  {
+    "_id": {
+      "$oid": "66e9b7d1a2c3d4e5f6a7b909"
+    },
+    "name": "Pāpāmoa Muni 9",
+    "slug": "papamoa-muni-9",
+    "createdBy": {
+      "$oid": "66f0a1c2e4b0a1b2c3d4e003"
+    },
+    "tees": [
+      {
+        "name": "Yellow",
+        "totalMetres": 2217
+      }
+    ],
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "metres": {
+          "Yellow": 298
+        }
+      },
+      {
+        "number": 2,
+        "par": 3,
+        "metres": {
+          "Yellow": 121
+        }
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "metres": {
+          "Yellow": 276
+        }
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "metres": {
+          "Yellow": 305
+        }
+      },
+      {
+        "number": 5,
+        "par": 3,
+        "metres": {
+          "Yellow": 140
+        }
+      },
+      {
+        "number": 6,
+        "par": 5,
+        "metres": {
+          "Yellow": 418
+        }
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "metres": {
+          "Yellow": 288
+        }
+      },
+      {
+        "number": 8,
+        "par": 3,
+        "metres": {
+          "Yellow": 109
+        }
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "metres": {
+          "Yellow": 262
+        }
+      }
+    ],
+    "createdAt": {
+      "$date": "2026-02-10T06:00:00Z"
+    },
+    "updatedAt": {
+      "$date": "2026-02-10T06:00:00Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "66e9b7d1a2c3d4e5f6a7b90a"
+    },
+    "name": "Tauranga Golf Club",
+    "slug": "tauranga-golf-club",
+    "createdBy": {
+      "$oid": "66f0a1c2e4b0a1b2c3d4e004"
+    },
+    "tees": [
+      {
+        "name": "Yellow",
+        "par": 71,
+        "totalMetres": 5691
+      },
+      {
+        "name": "White",
+        "par": 71,
+        "totalMetres": 5976
+      }
+    ],
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "metres": {
+          "Yellow": 341,
+          "White": 358
+        },
+        "strokeIndex": 5
+      },
+      {
+        "number": 2,
+        "par": 4,
+        "metres": {
+          "Yellow": 322,
+          "White": 338
+        },
+        "strokeIndex": 9
+      },
+      {
+        "number": 3,
+        "par": 3,
+        "metres": {
+          "Yellow": 156,
+          "White": 164
+        },
+        "strokeIndex": 15
+      },
+      {
+        "number": 4,
+        "par": 5,
+        "metres": {
+          "Yellow": 455,
+          "White": 478
+        },
+        "strokeIndex": 3
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "metres": {
+          "Yellow": 389,
+          "White": 408
+        },
+        "strokeIndex": 1
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "metres": {
+          "Yellow": 301,
+          "White": 316
+        },
+        "strokeIndex": 11
+      },
+      {
+        "number": 7,
+        "par": 3,
+        "metres": {
+          "Yellow": 133,
+          "White": 140
+        },
+        "strokeIndex": 17
+      },
+      {
+        "number": 8,
+        "par": 4,
+        "metres": {
+          "Yellow": 356,
+          "White": 374
+        },
+        "strokeIndex": 7
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "metres": {
+          "Yellow": 318,
+          "White": 334
+        },
+        "strokeIndex": 13
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "metres": {
+          "Yellow": 344,
+          "White": 361
+        },
+        "strokeIndex": 6
+      },
+      {
+        "number": 11,
+        "par": 5,
+        "metres": {
+          "Yellow": 470,
+          "White": 494
+        },
+        "strokeIndex": 2
+      },
+      {
+        "number": 12,
+        "par": 3,
+        "metres": {
+          "Yellow": 167,
+          "White": 175
+        },
+        "strokeIndex": 16
+      },
+      {
+        "number": 13,
+        "par": 4,
+        "metres": {
+          "Yellow": 312,
+          "White": 328
+        },
+        "strokeIndex": 10
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "metres": {
+          "Yellow": 377,
+          "White": 396
+        },
+        "strokeIndex": 4
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "metres": {
+          "Yellow": 329,
+          "White": 345
+        },
+        "strokeIndex": 12
+      },
+      {
+        "number": 16,
+        "par": 3,
+        "metres": {
+          "Yellow": 142,
+          "White": 149
+        },
+        "strokeIndex": 18
+      },
+      {
+        "number": 17,
+        "par": 5,
+        "metres": {
+          "Yellow": 448,
+          "White": 470
+        },
+        "strokeIndex": 8
+      },
+      {
+        "number": 18,
+        "par": 4,
+        "metres": {
+          "Yellow": 331,
+          "White": 348
+        },
+        "strokeIndex": 14
+      }
+    ],
+    "createdAt": {
+      "$date": "2026-01-15T07:00:00Z"
+    },
+    "updatedAt": {
+      "$date": "2026-01-15T07:00:00Z"
+    },
+    "region": "Bay of Plenty"
+  },
+  {
+    "_id": {
+      "$oid": "66e9b7d1a2c3d4e5f6a7b90b"
+    },
+    "name": "Omanu Golf Club",
+    "slug": "omanu-golf-club",
+    "createdBy": {
+      "$oid": "66f0a1c2e4b0a1b2c3d4e004"
+    },
+    "tees": [
+      {
+        "name": "Yellow",
+        "par": 72,
+        "totalMetres": 5892,
+        "courseRating": 69.8,
+        "slopeRating": 121
+      },
+      {
+        "name": "White",
+        "par": 72,
+        "totalMetres": 6216,
+        "courseRating": 71.2,
+        "slopeRating": 125
+      }
+    ],
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "metres": {
+          "Yellow": 352,
+          "White": 371
+        },
+        "strokeIndex": 7
+      },
+      {
+        "number": 2,
+        "par": 3,
+        "metres": {
+          "Yellow": 148,
+          "White": 156
+        },
+        "strokeIndex": 17
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "metres": {
+          "Yellow": 338,
+          "White": 357
+        },
+        "strokeIndex": 3
+      },
+      {
+        "number": 4,
+        "par": 5,
+        "metres": {
+          "Yellow": 452,
+          "White": 477
+        },
+        "strokeIndex": 11
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "metres": {
+          "Yellow": 371,
+          "White": 391
+        },
+        "strokeIndex": 1
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "metres": {
+          "Yellow": 318,
+          "White": 335
+        },
+        "strokeIndex": 13
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "metres": {
+          "Yellow": 345,
+          "White": 364
+        },
+        "strokeIndex": 5
+      },
+      {
+        "number": 8,
+        "par": 3,
+        "metres": {
+          "Yellow": 161,
+          "White": 170
+        },
+        "strokeIndex": 15
+      },
+      {
+        "number": 9,
+        "par": 5,
+        "metres": {
+          "Yellow": 470,
+          "White": 496
+        },
+        "strokeIndex": 9
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "metres": {
+          "Yellow": 330,
+          "White": 348
+        },
+        "strokeIndex": 8
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "metres": {
+          "Yellow": 362,
+          "White": 382
+        },
+        "strokeIndex": 4
+      },
+      {
+        "number": 12,
+        "par": 3,
+        "metres": {
+          "Yellow": 139,
+          "White": 147
+        },
+        "strokeIndex": 18
+      },
+      {
+        "number": 13,
+        "par": 5,
+        "metres": {
+          "Yellow": 447,
+          "White": 472
+        },
+        "strokeIndex": 12
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "metres": {
+          "Yellow": 381,
+          "White": 402
+        },
+        "strokeIndex": 2
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "metres": {
+          "Yellow": 322,
+          "White": 340
+        },
+        "strokeIndex": 10
+      },
+      {
+        "number": 16,
+        "par": 3,
+        "metres": {
+          "Yellow": 152,
+          "White": 160
+        },
+        "strokeIndex": 16
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "metres": {
+          "Yellow": 341,
+          "White": 360
+        },
+        "strokeIndex": 6
+      },
+      {
+        "number": 18,
+        "par": 5,
+        "metres": {
+          "Yellow": 463,
+          "White": 488
+        },
+        "strokeIndex": 14
+      }
+    ],
+    "createdAt": {
+      "$date": "2026-01-15T07:00:00Z"
+    },
+    "updatedAt": {
+      "$date": "2026-01-15T07:00:00Z"
+    },
+    "region": "Bay of Plenty",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        176.2238,
+        -37.6739
+      ]
+    }
+  },
+  {
+    "_id": {
+      "$oid": "66e9b7d1a2c3d4e5f6a7b90c"
+    },
+    "name": "Omanu Golf Club",
+    "slug": "omanu-golf-club",
+    "createdBy": {
+      "$oid": "66f0a1c2e4b0a1b2c3d4e005"
+    },
+    "tees": [
+      {
+        "name": "Yellow",
+        "par": 72,
+        "totalMetres": 5892,
+        "courseRating": 69.8,
+        "slopeRating": 121
+      },
+      {
+        "name": "White",
+        "par": 72,
+        "totalMetres": 6216,
+        "courseRating": 71.2,
+        "slopeRating": 125
+      }
+    ],
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "metres": {
+          "Yellow": 352,
+          "White": 371
+        },
+        "strokeIndex": 7
+      },
+      {
+        "number": 2,
+        "par": 3,
+        "metres": {
+          "Yellow": 148,
+          "White": 156
+        },
+        "strokeIndex": 17
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "metres": {
+          "Yellow": 338,
+          "White": 357
+        },
+        "strokeIndex": 3
+      },
+      {
+        "number": 4,
+        "par": 5,
+        "metres": {
+          "Yellow": 452,
+          "White": 477
+        },
+        "strokeIndex": 11
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "metres": {
+          "Yellow": 371,
+          "White": 391
+        },
+        "strokeIndex": 1
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "metres": {
+          "Yellow": 318,
+          "White": 335
+        },
+        "strokeIndex": 13
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "metres": {
+          "Yellow": 345,
+          "White": 364
+        },
+        "strokeIndex": 5
+      },
+      {
+        "number": 8,
+        "par": 3,
+        "metres": {
+          "Yellow": 161,
+          "White": 170
+        },
+        "strokeIndex": 15
+      },
+      {
+        "number": 9,
+        "par": 5,
+        "metres": {
+          "Yellow": 470,
+          "White": 496
+        },
+        "strokeIndex": 9
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "metres": {
+          "Yellow": 330,
+          "White": 348
+        },
+        "strokeIndex": 8
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "metres": {
+          "Yellow": 362,
+          "White": 382
+        },
+        "strokeIndex": 4
+      },
+      {
+        "number": 12,
+        "par": 3,
+        "metres": {
+          "Yellow": 139,
+          "White": 147
+        },
+        "strokeIndex": 18
+      },
+      {
+        "number": 13,
+        "par": 5,
+        "metres": {
+          "Yellow": 447,
+          "White": 472
+        },
+        "strokeIndex": 12
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "metres": {
+          "Yellow": 381,
+          "White": 402
+        },
+        "strokeIndex": 2
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "metres": {
+          "Yellow": 322,
+          "White": 340
+        },
+        "strokeIndex": 10
+      },
+      {
+        "number": 16,
+        "par": 3,
+        "metres": {
+          "Yellow": 152,
+          "White": 160
+        },
+        "strokeIndex": 16
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "metres": {
+          "Yellow": 341,
+          "White": 360
+        },
+        "strokeIndex": 6
+      },
+      {
+        "number": 18,
+        "par": 5,
+        "metres": {
+          "Yellow": 463,
+          "White": 488
+        },
+        "strokeIndex": 14
+      }
+    ],
+    "createdAt": {
+      "$date": "2026-03-01T06:00:00Z"
+    },
+    "updatedAt": {
+      "$date": "2026-03-01T06:00:00Z"
+    },
+    "region": "Bay of Plenty",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        176.2238,
+        -37.6739
+      ]
+    }
+  },
+  {
+    "_id": {
+      "$oid": "66e9b7d1a2c3d4e5f6a7b90d"
+    },
+    "name": "Pāpāmoa Muni 9",
+    "slug": "papamoa-muni-9",
+    "createdBy": {
+      "$oid": "66f0a1c2e4b0a1b2c3d4e006"
+    },
+    "tees": [
+      {
+        "name": "Yellow",
+        "totalMetres": 2217
+      }
+    ],
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "metres": {
+          "Yellow": 298
+        }
+      },
+      {
+        "number": 2,
+        "par": 3,
+        "metres": {
+          "Yellow": 121
+        }
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "metres": {
+          "Yellow": 276
+        }
+      },
+      {
+        "number": 4,
+        "par": 4,
+        "metres": {
+          "Yellow": 305
+        }
+      },
+      {
+        "number": 5,
+        "par": 3,
+        "metres": {
+          "Yellow": 140
+        }
+      },
+      {
+        "number": 6,
+        "par": 5,
+        "metres": {
+          "Yellow": 418
+        }
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "metres": {
+          "Yellow": 288
+        }
+      },
+      {
+        "number": 8,
+        "par": 3,
+        "metres": {
+          "Yellow": 109
+        }
+      },
+      {
+        "number": 9,
+        "par": 4,
+        "metres": {
+          "Yellow": 262
+        }
+      }
+    ],
+    "createdAt": {
+      "$date": "2026-10-01T06:00:00Z"
+    },
+    "updatedAt": {
+      "$date": "2026-10-01T06:00:00Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "66e9b7d1a2c3d4e5f6a7b90e"
+    },
+    "name": "Omanu Golf Club",
+    "slug": "omanu-golf-club",
+    "createdBy": {
+      "$oid": "66f0a1c2e4b0a1b2c3d4e006"
+    },
+    "tees": [
+      {
+        "name": "Yellow",
+        "par": 72,
+        "totalMetres": 5892,
+        "courseRating": 69.8,
+        "slopeRating": 121
+      },
+      {
+        "name": "White",
+        "par": 72,
+        "totalMetres": 6216,
+        "courseRating": 71.2,
+        "slopeRating": 125
+      }
+    ],
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "metres": {
+          "Yellow": 352,
+          "White": 371
+        },
+        "strokeIndex": 7
+      },
+      {
+        "number": 2,
+        "par": 3,
+        "metres": {
+          "Yellow": 148,
+          "White": 156
+        },
+        "strokeIndex": 17
+      },
+      {
+        "number": 3,
+        "par": 4,
+        "metres": {
+          "Yellow": 338,
+          "White": 357
+        },
+        "strokeIndex": 3
+      },
+      {
+        "number": 4,
+        "par": 5,
+        "metres": {
+          "Yellow": 452,
+          "White": 477
+        },
+        "strokeIndex": 11
+      },
+      {
+        "number": 5,
+        "par": 4,
+        "metres": {
+          "Yellow": 371,
+          "White": 391
+        },
+        "strokeIndex": 1
+      },
+      {
+        "number": 6,
+        "par": 4,
+        "metres": {
+          "Yellow": 318,
+          "White": 335
+        },
+        "strokeIndex": 13
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "metres": {
+          "Yellow": 345,
+          "White": 364
+        },
+        "strokeIndex": 5
+      },
+      {
+        "number": 8,
+        "par": 3,
+        "metres": {
+          "Yellow": 161,
+          "White": 170
+        },
+        "strokeIndex": 15
+      },
+      {
+        "number": 9,
+        "par": 5,
+        "metres": {
+          "Yellow": 470,
+          "White": 496
+        },
+        "strokeIndex": 9
+      },
+      {
+        "number": 10,
+        "par": 4,
+        "metres": {
+          "Yellow": 330,
+          "White": 348
+        },
+        "strokeIndex": 8
+      },
+      {
+        "number": 11,
+        "par": 4,
+        "metres": {
+          "Yellow": 362,
+          "White": 382
+        },
+        "strokeIndex": 4
+      },
+      {
+        "number": 12,
+        "par": 3,
+        "metres": {
+          "Yellow": 139,
+          "White": 147
+        },
+        "strokeIndex": 18
+      },
+      {
+        "number": 13,
+        "par": 5,
+        "metres": {
+          "Yellow": 447,
+          "White": 472
+        },
+        "strokeIndex": 12
+      },
+      {
+        "number": 14,
+        "par": 4,
+        "metres": {
+          "Yellow": 381,
+          "White": 402
+        },
+        "strokeIndex": 2
+      },
+      {
+        "number": 15,
+        "par": 4,
+        "metres": {
+          "Yellow": 322,
+          "White": 340
+        },
+        "strokeIndex": 10
+      },
+      {
+        "number": 16,
+        "par": 3,
+        "metres": {
+          "Yellow": 152,
+          "White": 160
+        },
+        "strokeIndex": 16
+      },
+      {
+        "number": 17,
+        "par": 4,
+        "metres": {
+          "Yellow": 341,
+          "White": 360
+        },
+        "strokeIndex": 6
+      },
+      {
+        "number": 18,
+        "par": 5,
+        "metres": {
+          "Yellow": 463,
+          "White": 488
+        },
+        "strokeIndex": 14
+      }
+    ],
+    "createdAt": {
+      "$date": "2026-10-01T06:00:00Z"
+    },
+    "updatedAt": {
+      "$date": "2026-10-01T06:00:00Z"
+    },
+    "region": "Bay of Plenty",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        176.2238,
+        -37.6739
+      ]
+    }
+  }
+]

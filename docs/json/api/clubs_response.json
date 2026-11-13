@@ -1,0 +1,41 @@
+{
+  "success": true,
+  "data": {
+    "userId": "66f0a1c2e4b0a1b2c3d4e5f6",
+    "units": "metric",
+    "minimumShots": 5,
+    "clubs": [
+      {
+        "code": "driver",
+        "label": "Driver",
+        "inBag": true,
+        "shotCount": 142,
+        "averageMetres": 212,
+        "longestMetres": 246,
+        "spreadMetres": 24,
+        "enoughData": true
+      },
+      {
+        "code": "7i",
+        "label": "7 iron",
+        "inBag": true,
+        "shotCount": 96,
+        "averageMetres": 140,
+        "longestMetres": 155,
+        "spreadMetres": 11,
+        "enoughData": true
+      },
+      {
+        "code": "4i",
+        "label": "4 iron",
+        "inBag": true,
+        "shotCount": 3,
+        "averageMetres": null,
+        "longestMetres": null,
+        "spreadMetres": null,
+        "enoughData": false
+      }
+    ],
+    "updatedAt": "2026-09-12T04:41:03.000Z"
+  }
+}

@@ -1,0 +1,2319 @@
+{
+  "info": {
+    "name": "Budget Golfers API",
+    "description": "Tests for every endpoint in the COMP.7214 Assignment 2 design (Table 7), plus the error cases from Table 8 and the default 404 route.\n\n1. Start the API (npm start) after loading the seed data (npm run seed).\n2. Import this collection and the \"Budget Golfers local\" environment.\n3. Run the whole collection with the Collection Runner (folders in order).\n\nThe seeded golfer Aroha (aroha.m@example.com / Correct-Horse-7) is used for read requests. A throwaway golfer is registered for creating, changing and deleting, and is deleted at the end, so the seed data stays the same.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "0. Setup",
+      "description": "Checks the API is running, signs in as the seeded golfer Aroha and registers a throwaway golfer for the create, change and delete tests (so the seed data is not changed).",
+      "item": [
+        {
+          "name": "Health check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/health",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "health"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"JSON success envelope\", () => {",
+                  "  pm.response.to.be.json;",
+                  "  pm.expect(pm.response.json().success).to.eql(true);",
+                  "});",
+                  "pm.test(\"status is ok\", () => pm.expect(pm.response.json().data.status).to.eql(\"ok\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Sign in as Aroha (seed user)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"aroha.m@example.com\",\n  \"password\": \"Correct-Horse-7\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"JSON success envelope\", () => {",
+                  "  pm.response.to.be.json;",
+                  "  pm.expect(pm.response.json().success).to.eql(true);",
+                  "});",
+                  "const d = pm.response.json().data;",
+                  "pm.test(\"token and user returned\", () => {",
+                  "  pm.expect(d.token).to.be.a(\"string\");",
+                  "  pm.expect(d.expiresIn).to.eql(3600);",
+                  "  pm.expect(d.user).to.include({ id: \"66f0a1c2e4b0a1b2c3d4e5f6\", email: \"aroha.m@example.com\", displayName: \"Aroha M.\" });",
+                  "  pm.expect(d.user).to.not.have.property(\"passwordHash\");",
+                  "});",
+                  "pm.collectionVariables.set(\"arohaToken\", d.token);",
+                  "pm.collectionVariables.set(\"arohaId\", d.user.id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Register a test golfer (201)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/register",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{testerEmail}}\",\n  \"password\": \"Postman-Test-1\",\n  \"displayName\": \"Postman Tester\",\n  \"homeCourseName\": \"Omanu Golf Club\",\n  \"client\": \"mobile-app\",\n  \"device\": {\n    \"deviceId\": \"postman-01\",\n    \"platform\": \"android\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 201\", () => pm.response.to.have.status(201));",
+                  "pm.test(\"JSON success envelope\", () => {",
+                  "  pm.response.to.be.json;",
+                  "  pm.expect(pm.response.json().success).to.eql(true);",
+                  "});",
+                  "const d = pm.response.json().data;",
+                  "pm.test(\"Location header points at the new user\", () => pm.expect(pm.response.headers.get(\"Location\")).to.eql(\"/api/users/\" + d.user.id));",
+                  "pm.test(\"app token lasts 30 days\", () => pm.expect(d.expiresIn).to.eql(2592000));",
+                  "pm.collectionVariables.set(\"testerToken\", d.token);",
+                  "pm.collectionVariables.set(\"testerId\", d.user.id);"
+                ]
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.collectionVariables.set(\"testerEmail\", \"postman.\" + Date.now() + \"@example.com\");",
+                  "pm.collectionVariables.set(\"clientRoundId\", pm.variables.replaceIn(\"{{$guid}}\"));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "1. Auth",
+      "item": [
+        {
+          "name": "Register with a used email (409)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/register",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"aroha.m@example.com\",\n  \"password\": \"Correct-Horse-7\",\n  \"displayName\": \"Copy\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 409\", () => pm.response.to.have.status(409));",
+                  "pm.test(\"JSON error EMAIL_TAKEN\", () => {",
+                  "  const e = pm.response.json().error;",
+                  "  pm.expect(pm.response.json().success).to.eql(false);",
+                  "  pm.expect(e.status).to.eql(409);",
+                  "  pm.expect(e.code).to.eql(\"EMAIL_TAKEN\");",
+                  "  pm.expect(e.message).to.be.a(\"string\");",
+                  "  pm.expect(e.requestId).to.match(/^req_[0-9a-f]{6}$/);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Register with invalid fields (422)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/register",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"not-an-email\",\n  \"password\": \"short\",\n  \"displayName\": \"A\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 422\", () => pm.response.to.have.status(422));",
+                  "pm.test(\"JSON error VALIDATION_FAILED\", () => {",
+                  "  const e = pm.response.json().error;",
+                  "  pm.expect(pm.response.json().success).to.eql(false);",
+                  "  pm.expect(e.status).to.eql(422);",
+                  "  pm.expect(e.code).to.eql(\"VALIDATION_FAILED\");",
+                  "  pm.expect(e.message).to.be.a(\"string\");",
+                  "  pm.expect(e.requestId).to.match(/^req_[0-9a-f]{6}$/);",
+                  "});",
+                  "pm.test(\"one detail per bad field\", () => {",
+                  "  const fields = pm.response.json().error.details.map(d => d.field);",
+                  "  pm.expect(fields).to.eql([\"email\", \"password\", \"displayName\"]);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login with a wrong password (401)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"aroha.m@example.com\",\n  \"password\": \"wrong-password\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 401\", () => pm.response.to.have.status(401));",
+                  "pm.test(\"JSON error UNAUTHENTICATED\", () => {",
+                  "  const e = pm.response.json().error;",
+                  "  pm.expect(pm.response.json().success).to.eql(false);",
+                  "  pm.expect(e.status).to.eql(401);",
+                  "  pm.expect(e.code).to.eql(\"UNAUTHENTICATED\");",
+                  "  pm.expect(e.message).to.be.a(\"string\");",
+                  "  pm.expect(e.requestId).to.match(/^req_[0-9a-f]{6}$/);",
+                  "});",
+                  "pm.test(\"does not say which part was wrong\", () => pm.expect(pm.response.json().error.message).to.eql(\"Email or password is incorrect.\"));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "2. Users",
+      "item": [
+        {
+          "name": "Get my profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{arohaToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "me"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"JSON success envelope\", () => {",
+                  "  pm.response.to.be.json;",
+                  "  pm.expect(pm.response.json().success).to.eql(true);",
+                  "});",
+                  "const d = pm.response.json().data;",
+                  "pm.test(\"matches the A2 users/me structure\", () => {",
+                  "  pm.expect(d).to.have.all.keys(\"id\", \"email\", \"displayName\", \"homeCourse\", \"handicapEstimate\", \"preferences\", \"createdAt\", \"links\");",
+                  "  pm.expect(d.homeCourse).to.eql({ id: \"66e9b7d1a2c3d4e5f6a7b8c9\", name: \"Omanu Golf Club\" });",
+                  "  pm.expect(d.handicapEstimate).to.be.a(\"number\");",
+                  "  pm.expect(d.links.stats).to.eql(\"/api/stats/66f0a1c2e4b0a1b2c3d4e5f6\");",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Change my preferences",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{testerToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/{{testerId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "{{testerId}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"displayName\": \"Postman Tester 2\",\n  \"preferences\": {\n    \"units\": \"imperial\",\n    \"showOnLeaderboard\": false\n  },\n  \"role\": \"admin\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"JSON success envelope\", () => {",
+                  "  pm.response.to.be.json;",
+                  "  pm.expect(pm.response.json().success).to.eql(true);",
+                  "});",
+                  "const d = pm.response.json().data;",
+                  "pm.test(\"name and preferences changed\", () => {",
+                  "  pm.expect(d.displayName).to.eql(\"Postman Tester 2\");",
+                  "  pm.expect(d.preferences).to.eql({ units: \"imperial\", theme: \"light\", showOnLeaderboard: false });",
+                  "});",
+                  "pm.test(\"role is not exposed or settable\", () => pm.expect(d).to.not.have.property(\"role\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Change someone else's account (403)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{testerToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/66f0a1c2e4b0a1b2c3d4e5f6",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "66f0a1c2e4b0a1b2c3d4e5f6"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"displayName\": \"Hacked\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 403\", () => pm.response.to.have.status(403));",
+                  "pm.test(\"JSON error FORBIDDEN\", () => {",
+                  "  const e = pm.response.json().error;",
+                  "  pm.expect(pm.response.json().success).to.eql(false);",
+                  "  pm.expect(e.status).to.eql(403);",
+                  "  pm.expect(e.code).to.eql(\"FORBIDDEN\");",
+                  "  pm.expect(e.message).to.be.a(\"string\");",
+                  "  pm.expect(e.requestId).to.match(/^req_[0-9a-f]{6}$/);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Export my data as JSON",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{arohaToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/{{arohaId}}/export?format=json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "{{arohaId}}",
+                "export"
+              ],
+              "query": [
+                {
+                  "key": "format",
+                  "value": "json"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"JSON success envelope\", () => {",
+                  "  pm.response.to.be.json;",
+                  "  pm.expect(pm.response.json().success).to.eql(true);",
+                  "});",
+                  "pm.test(\"download headers\", () => pm.expect(pm.response.headers.get(\"Content-Disposition\")).to.include(\"attachment\"));",
+                  "pm.test(\"rounds, courses and clubs included\", () => {",
+                  "  const d = pm.response.json().data;",
+                  "  pm.expect(d.rounds.length).to.eql(32);",
+                  "  pm.expect(d.courses.length).to.eql(3);",
+                  "  pm.expect(d.clubs.length).to.be.above(10);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Export my data as CSV",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{arohaToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/{{arohaId}}/export?format=csv",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "{{arohaId}}",
+                "export"
+              ],
+              "query": [
+                {
+                  "key": "format",
+                  "value": "csv"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"CSV file\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"text/csv\"));",
+                  "pm.test(\"one row per hole plus the club table\", () => {",
+                  "  const rows = pm.response.text().trim().split(\"\\r\\n\");",
+                  "  pm.expect(rows[0]).to.include(\"roundId,playedAt,course\");",
+                  "  pm.expect(rows.length).to.be.above(500);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "3. Rounds",
+      "item": [
+        {
+          "name": "List my rounds (page 1)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{arohaToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/rounds?page=1&limit=10",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "rounds"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"JSON success envelope\", () => {",
+                  "  pm.response.to.be.json;",
+                  "  pm.expect(pm.response.json().success).to.eql(true);",
+                  "});",
+                  "const b = pm.response.json();",
+                  "pm.test(\"matches the A2 rounds list structure\", () => {",
+                  "  pm.expect(b.data.length).to.eql(10);",
+                  "  pm.expect(b.data[0]).to.have.all.keys(\"id\", \"playedAt\", \"course\", \"tee\", \"holesPlayed\", \"totals\", \"isPersonalBest\", \"links\");",
+                  "  pm.expect(b.data[0]).to.not.have.property(\"holes\");",
+                  "  pm.expect(b.meta).to.include({ page: 1, limit: 10, total: 32, totalPages: 4, sort: \"-playedAt\" });",
+                  "  pm.expect(b.links.next).to.eql(\"/api/rounds?sort=-playedAt&page=2&limit=10\");",
+                  "  pm.expect(b.links.prev).to.eql(null);",
+                  "});",
+                  "pm.test(\"newest first\", () => {",
+                  "  const dates = b.data.map(r => r.playedAt);",
+                  "  pm.expect([...dates].sort().reverse()).to.eql(dates);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Filter rounds by date, holes and course",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{arohaToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/rounds?from=2026-09-01&to=2026-09-30&holes=18&courseId=66e9b7d1a2c3d4e5f6a7b8c9",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "rounds"
+              ],
+              "query": [
+                {
+                  "key": "from",
+                  "value": "2026-09-01"
+                },
+                {
+                  "key": "to",
+                  "value": "2026-09-30"
+                },
+                {
+                  "key": "holes",
+                  "value": "18"
+                },
+                {
+                  "key": "courseId",
+                  "value": "66e9b7d1a2c3d4e5f6a7b8c9"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"JSON success envelope\", () => {",
+                  "  pm.response.to.be.json;",
+                  "  pm.expect(pm.response.json().success).to.eql(true);",
+                  "});",
+                  "const b = pm.response.json();",
+                  "pm.test(\"only 18-hole Omanu rounds in September\", () => {",
+                  "  pm.expect(b.data.length).to.be.above(0);",
+                  "  b.data.forEach(r => {",
+                  "    pm.expect(r.holesPlayed).to.eql(18);",
+                  "    pm.expect(r.course.id).to.eql(\"66e9b7d1a2c3d4e5f6a7b8c9\");",
+                  "    pm.expect(r.playedAt.slice(0, 7)).to.eql(\"2026-09\");",
+                  "  });",
+                  "  pm.expect(b.meta.filters).to.eql({ from: \"2026-09-01\", to: \"2026-09-30\", courseId: \"66e9b7d1a2c3d4e5f6a7b8c9\", holes: 18 });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Sort rounds by score",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{arohaToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/rounds?sort=strokes&holes=18&limit=3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "rounds"
+              ],
+              "query": [
+                {
+                  "key": "sort",
+                  "value": "strokes"
+                },
+                {
+                  "key": "holes",
+                  "value": "18"
+                },
+                {
+                  "key": "limit",
+                  "value": "3"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"JSON success envelope\", () => {",
+                  "  pm.response.to.be.json;",
+                  "  pm.expect(pm.response.json().success).to.eql(true);",
+                  "});",
+                  "pm.test(\"lowest score first and it is the personal best\", () => {",
+                  "  const d = pm.response.json().data;",
+                  "  pm.expect(d[0].totals.strokes).to.eql(84);",
+                  "  pm.expect(d[0].isPersonalBest).to.eql(true);",
+                  "  pm.expect(d[0].totals.strokes <= d[1].totals.strokes).to.be.true;",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get one round (the A2 example round)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{arohaToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/rounds/66f2c9e0b1a2c3d4e5f60718",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "rounds",
+                "66f2c9e0b1a2c3d4e5f60718"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"JSON success envelope\", () => {",
+                  "  pm.response.to.be.json;",
+                  "  pm.expect(pm.response.json().success).to.eql(true);",
+                  "});",
+                  "const d = pm.response.json().data;",
+                  "pm.test(\"matches the A2 round detail\", () => {",
+                  "  pm.expect(d).to.include({ id: \"66f2c9e0b1a2c3d4e5f60718\", playedAt: \"2026-09-12T02:10:00.000Z\", tee: \"Yellow\", holesPlayed: 18, notes: \"Windy back nine\" });",
+                  "  pm.expect(d.course).to.eql({ id: \"66e9b7d1a2c3d4e5f6a7b8c9\", name: \"Omanu Golf Club\", par: 72 });",
+                  "  pm.expect(d.totals).to.include({ strokes: 84, toPar: 12, putts: 31 });",
+                  "  pm.expect(d.holes.length).to.eql(18);",
+                  "  pm.expect(d.links.course).to.eql(\"/api/courses/66e9b7d1a2c3d4e5f6a7b8c9\");",
+                  "});",
+                  "pm.test(\"shots use { lat, lng }\", () => {",
+                  "  const shot = d.holes.find(h => h.shots).shots[0];",
+                  "  pm.expect(shot.start).to.have.all.keys(\"lat\", \"lng\");",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Upload a round from the app (201)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{testerToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/rounds",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "rounds"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clientRoundId\": \"{{clientRoundId}}\",\n  \"course\": {\n    \"name\": \"Omanu Golf Club\"\n  },\n  \"tee\": \"Yellow\",\n  \"playedAt\": \"2026-10-25T01:30:00.000Z\",\n  \"source\": \"mobile-app\",\n  \"holes\": [\n    {\n      \"number\": 1,\n      \"par\": 4,\n      \"distanceMetres\": 352,\n      \"strokes\": 4,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": true\n    },\n    {\n      \"number\": 2,\n      \"par\": 3,\n      \"distanceMetres\": 148,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"6i\"\n    },\n    {\n      \"number\": 3,\n      \"par\": 4,\n      \"distanceMetres\": 338,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": true\n    },\n    {\n      \"number\": 4,\n      \"par\": 5,\n      \"distanceMetres\": 452,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"6i\",\n      \"fairwayHit\": false\n    },\n    {\n      \"number\": 5,\n      \"par\": 4,\n      \"distanceMetres\": 371,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": true\n    },\n    {\n      \"number\": 6,\n      \"par\": 4,\n      \"distanceMetres\": 318,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": false\n    },\n    {\n      \"number\": 7,\n      \"par\": 4,\n      \"distanceMetres\": 345,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": true,\n      \"shots\": [\n        {\n          \"seq\": 1,\n          \"club\": \"driver\",\n          \"start\": {\n            \"lat\": -37.67412,\n            \"lng\": 176.22401\n          },\n          \"end\": {\n            \"lat\": -37.67595,\n            \"lng\": 176.22498\n          },\n          \"result\": \"rough-left\"\n        },\n        {\n          \"seq\": 2,\n          \"club\": \"7i\",\n          \"start\": {\n            \"lat\": -37.67595,\n            \"lng\": 176.22498\n          },\n          \"end\": {\n            \"lat\": -37.6769,\n            \"lng\": 176.2253\n          },\n          \"result\": \"bunker\"\n        }\n      ]\n    },\n    {\n      \"number\": 8,\n      \"par\": 3,\n      \"distanceMetres\": 161,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"6i\"\n    },\n    {\n      \"number\": 9,\n      \"par\": 5,\n      \"distanceMetres\": 470,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": true\n    },\n    {\n      \"number\": 10,\n      \"par\": 4,\n      \"distanceMetres\": 330,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": false\n    },\n    {\n      \"number\": 11,\n      \"par\": 4,\n      \"distanceMetres\": 362,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": true\n    },\n    {\n      \"number\": 12,\n      \"par\": 3,\n      \"distanceMetres\": 139,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"6i\"\n    },\n    {\n      \"number\": 13,\n      \"par\": 5,\n      \"distanceMetres\": 447,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": true\n    },\n    {\n      \"number\": 14,\n      \"par\": 4,\n      \"distanceMetres\": 381,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": false\n    },\n    {\n      \"number\": 15,\n      \"par\": 4,\n      \"distanceMetres\": 322,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": true\n    },\n    {\n      \"number\": 16,\n      \"par\": 3,\n      \"distanceMetres\": 152,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"6i\"\n    },\n    {\n      \"number\": 17,\n      \"par\": 4,\n      \"distanceMetres\": 341,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": true\n    },\n    {\n      \"number\": 18,\n      \"par\": 5,\n      \"distanceMetres\": 463,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": false\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 201\", () => pm.response.to.have.status(201));",
+                  "pm.test(\"JSON success envelope\", () => {",
+                  "  pm.response.to.be.json;",
+                  "  pm.expect(pm.response.json().success).to.eql(true);",
+                  "});",
+                  "const d = pm.response.json().data;",
+                  "pm.test(\"totals worked out by the server\", () => {",
+                  "  pm.expect(d.totals).to.eql({ strokes: 89, toPar: 17, putts: 36 });",
+                  "  pm.expect(d.duplicate).to.eql(false);",
+                  "  pm.expect(d.clientRoundId).to.eql(pm.collectionVariables.get(\"clientRoundId\"));",
+                  "});",
+                  "pm.test(\"Location header\", () => pm.expect(pm.response.headers.get(\"Location\")).to.eql(\"/api/rounds/\" + d.id));",
+                  "pm.collectionVariables.set(\"roundId\", d.id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Upload the same round again (200 duplicate)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{testerToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/rounds",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "rounds"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clientRoundId\": \"{{clientRoundId}}\",\n  \"course\": {\n    \"name\": \"Omanu Golf Club\"\n  },\n  \"tee\": \"Yellow\",\n  \"playedAt\": \"2026-10-25T01:30:00.000Z\",\n  \"source\": \"mobile-app\",\n  \"holes\": [\n    {\n      \"number\": 1,\n      \"par\": 4,\n      \"distanceMetres\": 352,\n      \"strokes\": 4,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": true\n    },\n    {\n      \"number\": 2,\n      \"par\": 3,\n      \"distanceMetres\": 148,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"6i\"\n    },\n    {\n      \"number\": 3,\n      \"par\": 4,\n      \"distanceMetres\": 338,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": true\n    },\n    {\n      \"number\": 4,\n      \"par\": 5,\n      \"distanceMetres\": 452,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"6i\",\n      \"fairwayHit\": false\n    },\n    {\n      \"number\": 5,\n      \"par\": 4,\n      \"distanceMetres\": 371,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": true\n    },\n    {\n      \"number\": 6,\n      \"par\": 4,\n      \"distanceMetres\": 318,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": false\n    },\n    {\n      \"number\": 7,\n      \"par\": 4,\n      \"distanceMetres\": 345,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": true,\n      \"shots\": [\n        {\n          \"seq\": 1,\n          \"club\": \"driver\",\n          \"start\": {\n            \"lat\": -37.67412,\n            \"lng\": 176.22401\n          },\n          \"end\": {\n            \"lat\": -37.67595,\n            \"lng\": 176.22498\n          },\n          \"result\": \"rough-left\"\n        },\n        {\n          \"seq\": 2,\n          \"club\": \"7i\",\n          \"start\": {\n            \"lat\": -37.67595,\n            \"lng\": 176.22498\n          },\n          \"end\": {\n            \"lat\": -37.6769,\n            \"lng\": 176.2253\n          },\n          \"result\": \"bunker\"\n        }\n      ]\n    },\n    {\n      \"number\": 8,\n      \"par\": 3,\n      \"distanceMetres\": 161,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"6i\"\n    },\n    {\n      \"number\": 9,\n      \"par\": 5,\n      \"distanceMetres\": 470,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": true\n    },\n    {\n      \"number\": 10,\n      \"par\": 4,\n      \"distanceMetres\": 330,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": false\n    },\n    {\n      \"number\": 11,\n      \"par\": 4,\n      \"distanceMetres\": 362,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": true\n    },\n    {\n      \"number\": 12,\n      \"par\": 3,\n      \"distanceMetres\": 139,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"6i\"\n    },\n    {\n      \"number\": 13,\n      \"par\": 5,\n      \"distanceMetres\": 447,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": true\n    },\n    {\n      \"number\": 14,\n      \"par\": 4,\n      \"distanceMetres\": 381,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": false\n    },\n    {\n      \"number\": 15,\n      \"par\": 4,\n      \"distanceMetres\": 322,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": true\n    },\n    {\n      \"number\": 16,\n      \"par\": 3,\n      \"distanceMetres\": 152,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"6i\"\n    },\n    {\n      \"number\": 17,\n      \"par\": 4,\n      \"distanceMetres\": 341,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": true\n    },\n    {\n      \"number\": 18,\n      \"par\": 5,\n      \"distanceMetres\": 463,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": false\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"JSON success envelope\", () => {",
+                  "  pm.response.to.be.json;",
+                  "  pm.expect(pm.response.json().success).to.eql(true);",
+                  "});",
+                  "pm.test(\"the saved round is returned, not a copy\", () => {",
+                  "  const d = pm.response.json().data;",
+                  "  pm.expect(d.duplicate).to.eql(true);",
+                  "  pm.expect(d.id).to.eql(pm.collectionVariables.get(\"roundId\"));",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get the uploaded round",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{testerToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/rounds/{{roundId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "rounds",
+                "{{roundId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"JSON success envelope\", () => {",
+                  "  pm.response.to.be.json;",
+                  "  pm.expect(pm.response.json().success).to.eql(true);",
+                  "});",
+                  "const d = pm.response.json().data;",
+                  "pm.test(\"the course was created from its name\", () => pm.expect(d.course.name).to.eql(\"Omanu Golf Club\"));",
+                  "pm.test(\"shot distance measured from GPS\", () => {",
+                  "  const shot = d.holes[6].shots[0];",
+                  "  pm.expect(shot.distanceMetres).to.be.within(210, 230);",
+                  "  pm.expect(shot.result).to.eql(\"rough-left\");",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Correct a hole score",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{testerToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/rounds/{{roundId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "rounds",
+                "{{roundId}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"notes\": \"Windy back nine\",\n  \"holes\": [\n    {\n      \"number\": 2,\n      \"strokes\": 3,\n      \"putts\": 1\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"JSON success envelope\", () => {",
+                  "  pm.response.to.be.json;",
+                  "  pm.expect(pm.response.json().success).to.eql(true);",
+                  "});",
+                  "const d = pm.response.json().data;",
+                  "pm.test(\"hole changed and totals recalculated\", () => {",
+                  "  pm.expect(d.holes[1]).to.include({ number: 2, strokes: 3, putts: 1 });",
+                  "  pm.expect(d.totals.strokes).to.eql(87);",
+                  "  pm.expect(d.totals.putts).to.eql(35);",
+                  "  pm.expect(d.notes).to.eql(\"Windy back nine\");",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get another golfer's round (404)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{testerToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/rounds/66f2c9e0b1a2c3d4e5f60718",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "rounds",
+                "66f2c9e0b1a2c3d4e5f60718"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 404\", () => pm.response.to.have.status(404));",
+                  "pm.test(\"JSON error NOT_FOUND\", () => {",
+                  "  const e = pm.response.json().error;",
+                  "  pm.expect(pm.response.json().success).to.eql(false);",
+                  "  pm.expect(e.status).to.eql(404);",
+                  "  pm.expect(e.code).to.eql(\"NOT_FOUND\");",
+                  "  pm.expect(e.message).to.be.a(\"string\");",
+                  "  pm.expect(e.requestId).to.match(/^req_[0-9a-f]{6}$/);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Upload a round with a bad score (422)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{testerToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/rounds",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "rounds"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"course\": {\n    \"name\": \"Omanu Golf Club\"\n  },\n  \"tee\": \"Yellow\",\n  \"playedAt\": \"2026-10-25T01:30:00.000Z\",\n  \"source\": \"mobile-app\",\n  \"holes\": [\n    {\n      \"number\": 1,\n      \"par\": 4,\n      \"distanceMetres\": 352,\n      \"strokes\": 4,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": true\n    },\n    {\n      \"number\": 2,\n      \"par\": 3,\n      \"distanceMetres\": 148,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"6i\"\n    },\n    {\n      \"number\": 3,\n      \"par\": 4,\n      \"distanceMetres\": 338,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": true\n    },\n    {\n      \"number\": 4,\n      \"par\": 5,\n      \"distanceMetres\": 452,\n      \"strokes\": 25,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"6i\",\n      \"fairwayHit\": false\n    },\n    {\n      \"number\": 5,\n      \"par\": 4,\n      \"distanceMetres\": 371,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": true\n    },\n    {\n      \"number\": 6,\n      \"par\": 4,\n      \"distanceMetres\": 318,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": false\n    },\n    {\n      \"number\": 7,\n      \"par\": 4,\n      \"distanceMetres\": 345,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": true,\n      \"shots\": [\n        {\n          \"seq\": 1,\n          \"club\": \"driver\",\n          \"start\": {\n            \"lat\": -37.67412,\n            \"lng\": 176.22401\n          },\n          \"end\": {\n            \"lat\": -37.67595,\n            \"lng\": 176.22498\n          },\n          \"result\": \"rough-left\"\n        },\n        {\n          \"seq\": 2,\n          \"club\": \"7i\",\n          \"start\": {\n            \"lat\": -37.67595,\n            \"lng\": 176.22498\n          },\n          \"end\": {\n            \"lat\": -37.6769,\n            \"lng\": 176.2253\n          },\n          \"result\": \"bunker\"\n        }\n      ]\n    },\n    {\n      \"number\": 8,\n      \"par\": 3,\n      \"distanceMetres\": 161,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"6i\"\n    },\n    {\n      \"number\": 9,\n      \"par\": 5,\n      \"distanceMetres\": 470,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": true\n    },\n    {\n      \"number\": 10,\n      \"par\": 4,\n      \"distanceMetres\": 330,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": false\n    },\n    {\n      \"number\": 11,\n      \"par\": 4,\n      \"distanceMetres\": 362,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": true\n    },\n    {\n      \"number\": 12,\n      \"par\": 3,\n      \"distanceMetres\": 139,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"6i\"\n    },\n    {\n      \"number\": 13,\n      \"par\": 5,\n      \"distanceMetres\": 447,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": true\n    },\n    {\n      \"number\": 14,\n      \"par\": 4,\n      \"distanceMetres\": 381,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": false\n    },\n    {\n      \"number\": 15,\n      \"par\": 4,\n      \"distanceMetres\": 322,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": true\n    },\n    {\n      \"number\": 16,\n      \"par\": 3,\n      \"distanceMetres\": 152,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"6i\"\n    },\n    {\n      \"number\": 17,\n      \"par\": 4,\n      \"distanceMetres\": 341,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": true\n    },\n    {\n      \"number\": 18,\n      \"par\": 5,\n      \"distanceMetres\": 463,\n      \"strokes\": 5,\n      \"putts\": 2,\n      \"penalties\": 0,\n      \"teeClub\": \"driver\",\n      \"fairwayHit\": false\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 422\", () => pm.response.to.have.status(422));",
+                  "pm.test(\"JSON error VALIDATION_FAILED\", () => {",
+                  "  const e = pm.response.json().error;",
+                  "  pm.expect(pm.response.json().success).to.eql(false);",
+                  "  pm.expect(e.status).to.eql(422);",
+                  "  pm.expect(e.code).to.eql(\"VALIDATION_FAILED\");",
+                  "  pm.expect(e.message).to.be.a(\"string\");",
+                  "  pm.expect(e.requestId).to.match(/^req_[0-9a-f]{6}$/);",
+                  "});",
+                  "pm.test(\"matches the A2 error example\", () => {",
+                  "  pm.expect(pm.response.json().error.details).to.eql([{ field: \"holes[3].strokes\", issue: \"must be between 1 and 20\" }]);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "List with limit=500 (400)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{arohaToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/rounds?limit=500",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "rounds"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "500"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"JSON error BAD_REQUEST\", () => {",
+                  "  const e = pm.response.json().error;",
+                  "  pm.expect(pm.response.json().success).to.eql(false);",
+                  "  pm.expect(e.status).to.eql(400);",
+                  "  pm.expect(e.code).to.eql(\"BAD_REQUEST\");",
+                  "  pm.expect(e.message).to.be.a(\"string\");",
+                  "  pm.expect(e.requestId).to.match(/^req_[0-9a-f]{6}$/);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Delete the uploaded round (204)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{testerToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/rounds/{{roundId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "rounds",
+                "{{roundId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 204\", () => pm.response.to.have.status(204));",
+                  "pm.test(\"no body\", () => pm.expect(pm.response.text()).to.eql(\"\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get the deleted round (404)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{testerToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/rounds/{{roundId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "rounds",
+                "{{roundId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 404\", () => pm.response.to.have.status(404));",
+                  "pm.test(\"JSON error NOT_FOUND\", () => {",
+                  "  const e = pm.response.json().error;",
+                  "  pm.expect(pm.response.json().success).to.eql(false);",
+                  "  pm.expect(e.status).to.eql(404);",
+                  "  pm.expect(e.code).to.eql(\"NOT_FOUND\");",
+                  "  pm.expect(e.message).to.be.a(\"string\");",
+                  "  pm.expect(e.requestId).to.match(/^req_[0-9a-f]{6}$/);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "4. Courses",
+      "item": [
+        {
+          "name": "List my courses",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{arohaToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/courses",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "courses"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"JSON success envelope\", () => {",
+                  "  pm.response.to.be.json;",
+                  "  pm.expect(pm.response.json().success).to.eql(true);",
+                  "});",
+                  "const b = pm.response.json();",
+                  "pm.test(\"matches the A2 courses list\", () => {",
+                  "  pm.expect(b.data.length).to.eql(3);",
+                  "  pm.expect(b.data[0]).to.have.all.keys(\"id\", \"name\", \"region\", \"holes\", \"par\");",
+                  "  pm.expect(b.meta.total).to.eql(3);",
+                  "});",
+                  "pm.test(\"a self-named 9-hole course with no par for 18\", () => {",
+                  "  const muni = b.data.find(c => c.holes === 9);",
+                  "  pm.expect(muni.par).to.eql(null);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Search courses",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{arohaToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/courses?search=oma",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "courses"
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "oma"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"JSON success envelope\", () => {",
+                  "  pm.response.to.be.json;",
+                  "  pm.expect(pm.response.json().success).to.eql(true);",
+                  "});",
+                  "pm.test(\"finds Omanu\", () => {",
+                  "  const b = pm.response.json();",
+                  "  pm.expect(b.data.map(c => c.name)).to.eql([\"Omanu Golf Club\"]);",
+                  "  pm.expect(b.meta.search).to.eql(\"oma\");",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get one course with tees and holes",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{arohaToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/courses/66e9b7d1a2c3d4e5f6a7b8c9",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "courses",
+                "66e9b7d1a2c3d4e5f6a7b8c9"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"JSON success envelope\", () => {",
+                  "  pm.response.to.be.json;",
+                  "  pm.expect(pm.response.json().success).to.eql(true);",
+                  "});",
+                  "const d = pm.response.json().data;",
+                  "pm.test(\"tees, holes and location\", () => {",
+                  "  pm.expect(d.par).to.eql(72);",
+                  "  pm.expect(d.tees.map(t => t.name)).to.eql([\"Yellow\", \"White\"]);",
+                  "  pm.expect(d.tees[0]).to.include({ courseRating: 69.8, slopeRating: 121 });",
+                  "  pm.expect(d.holes.length).to.eql(18);",
+                  "  pm.expect(d.holes[0]).to.eql({ number: 1, par: 4, strokeIndex: 7, metres: { Yellow: 352, White: 371 } });",
+                  "  pm.expect(d.location).to.eql({ lat: -37.6739, lng: 176.2238 });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get another golfer's course (404)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{testerToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/courses/66e9b7d1a2c3d4e5f6a7b8c9",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "courses",
+                "66e9b7d1a2c3d4e5f6a7b8c9"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 404\", () => pm.response.to.have.status(404));",
+                  "pm.test(\"JSON error NOT_FOUND\", () => {",
+                  "  const e = pm.response.json().error;",
+                  "  pm.expect(pm.response.json().success).to.eql(false);",
+                  "  pm.expect(e.status).to.eql(404);",
+                  "  pm.expect(e.code).to.eql(\"NOT_FOUND\");",
+                  "  pm.expect(e.message).to.be.a(\"string\");",
+                  "  pm.expect(e.requestId).to.match(/^req_[0-9a-f]{6}$/);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "5. Stats",
+      "item": [
+        {
+          "name": "My stats, last 20 rounds",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{arohaToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/stats/{{arohaId}}?period=last20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "stats",
+                "{{arohaId}}"
+              ],
+              "query": [
+                {
+                  "key": "period",
+                  "value": "last20"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"JSON success envelope\", () => {",
+                  "  pm.response.to.be.json;",
+                  "  pm.expect(pm.response.json().success).to.eql(true);",
+                  "});",
+                  "const d = pm.response.json().data;",
+                  "pm.test(\"matches the A2 stats structure\", () => {",
+                  "  pm.expect(d).to.have.all.keys(\"userId\", \"period\", \"roundsInPeriod\", \"roundsAllTime\", \"scoring\", \"putting\", \"accuracy\", \"scoreDistribution\", \"trend\", \"handicapEstimate\", \"calculatedAt\");",
+                  "  pm.expect(d.scoring).to.have.all.keys(\"averageScore\", \"averageToPar\", \"bestScore\", \"bestRoundId\", \"changeVsPreviousPeriod\");",
+                  "  pm.expect(d.accuracy).to.have.all.keys(\"fairwaysHitPct\", \"greensInRegulationPct\", \"teeShotsOnTargetPct\", \"commonMiss\");",
+                  "  pm.expect(d.scoreDistribution).to.have.all.keys(\"birdieOrBetter\", \"par\", \"bogey\", \"doubleOrWorse\");",
+                  "});",
+                  "pm.test(\"20 rounds in the period, 32 in total\", () => {",
+                  "  pm.expect(d.roundsInPeriod).to.eql(20);",
+                  "  pm.expect(d.roundsAllTime).to.eql(32);",
+                  "});",
+                  "pm.test(\"trend has a rolling average\", () => pm.expect(d.trend[0]).to.have.all.keys(\"roundId\", \"playedAt\", \"score\", \"rollingAverage\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "My stats, all time",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{arohaToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/stats/{{arohaId}}?period=all",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "stats",
+                "{{arohaId}}"
+              ],
+              "query": [
+                {
+                  "key": "period",
+                  "value": "all"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"JSON success envelope\", () => {",
+                  "  pm.response.to.be.json;",
+                  "  pm.expect(pm.response.json().success).to.eql(true);",
+                  "});",
+                  "pm.test(\"best score is the A2 example round\", () => {",
+                  "  const s = pm.response.json().data.scoring;",
+                  "  pm.expect(s.bestScore).to.eql(84);",
+                  "  pm.expect(s.bestRoundId).to.eql(\"66f2c9e0b1a2c3d4e5f60718\");",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Someone else's stats (403)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{testerToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/stats/66f0a1c2e4b0a1b2c3d4e5f6",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "stats",
+                "66f0a1c2e4b0a1b2c3d4e5f6"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 403\", () => pm.response.to.have.status(403));",
+                  "pm.test(\"JSON error FORBIDDEN\", () => {",
+                  "  const e = pm.response.json().error;",
+                  "  pm.expect(pm.response.json().success).to.eql(false);",
+                  "  pm.expect(e.status).to.eql(403);",
+                  "  pm.expect(e.code).to.eql(\"FORBIDDEN\");",
+                  "  pm.expect(e.message).to.be.a(\"string\");",
+                  "  pm.expect(e.requestId).to.match(/^req_[0-9a-f]{6}$/);",
+                  "});",
+                  "pm.test(\"message from the A2 design\", () => pm.expect(pm.response.json().error.message).to.eql(\"You can only view your own statistics.\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Unknown period (400)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{arohaToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/stats/{{arohaId}}?period=decade",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "stats",
+                "{{arohaId}}"
+              ],
+              "query": [
+                {
+                  "key": "period",
+                  "value": "decade"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"JSON error BAD_REQUEST\", () => {",
+                  "  const e = pm.response.json().error;",
+                  "  pm.expect(pm.response.json().success).to.eql(false);",
+                  "  pm.expect(e.status).to.eql(400);",
+                  "  pm.expect(e.code).to.eql(\"BAD_REQUEST\");",
+                  "  pm.expect(e.message).to.be.a(\"string\");",
+                  "  pm.expect(e.requestId).to.match(/^req_[0-9a-f]{6}$/);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "6. Clubs",
+      "item": [
+        {
+          "name": "My clubs with distances",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{arohaToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/clubs/{{arohaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "clubs",
+                "{{arohaId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"JSON success envelope\", () => {",
+                  "  pm.response.to.be.json;",
+                  "  pm.expect(pm.response.json().success).to.eql(true);",
+                  "});",
+                  "const d = pm.response.json().data;",
+                  "pm.test(\"matches the A2 clubs structure\", () => {",
+                  "  pm.expect(d).to.include({ userId: \"66f0a1c2e4b0a1b2c3d4e5f6\", units: \"metric\", minimumShots: 5 });",
+                  "  pm.expect(d.clubs[0]).to.have.all.keys(\"code\", \"label\", \"inBag\", \"shotCount\", \"averageMetres\", \"longestMetres\", \"spreadMetres\", \"enoughData\");",
+                  "});",
+                  "pm.test(\"driver has an average; 4 iron does not have enough shots\", () => {",
+                  "  const driver = d.clubs.find(c => c.code === \"driver\");",
+                  "  const four = d.clubs.find(c => c.code === \"4i\");",
+                  "  pm.expect(driver.enoughData).to.eql(true);",
+                  "  pm.expect(driver.averageMetres).to.be.within(190, 240);",
+                  "  pm.expect(four).to.include({ enoughData: false, averageMetres: null });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Replace my bag",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{testerToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/clubs/{{testerId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "clubs",
+                "{{testerId}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clubs\": [\n    {\n      \"code\": \"driver\",\n      \"inBag\": true\n    },\n    {\n      \"code\": \"4i\",\n      \"inBag\": false\n    },\n    {\n      \"code\": \"5h\",\n      \"label\": \"5 hybrid\",\n      \"inBag\": true\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"JSON success envelope\", () => {",
+                  "  pm.response.to.be.json;",
+                  "  pm.expect(pm.response.json().success).to.eql(true);",
+                  "});",
+                  "pm.test(\"bag replaced, units from my preferences\", () => {",
+                  "  const d = pm.response.json().data;",
+                  "  pm.expect(d.clubs.map(c => [c.code, c.inBag])).to.eql([[\"driver\", true], [\"5h\", true], [\"4i\", false]]);",
+                  "  pm.expect(d.units).to.eql(\"imperial\");",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Put 15 clubs in the bag (422)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{testerToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/clubs/{{testerId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "clubs",
+                "{{testerId}}"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clubs\": [\n    {\n      \"code\": \"driver\",\n      \"inBag\": true\n    },\n    {\n      \"code\": \"3w\",\n      \"inBag\": true\n    },\n    {\n      \"code\": \"5w\",\n      \"inBag\": true\n    },\n    {\n      \"code\": \"7w\",\n      \"inBag\": true\n    },\n    {\n      \"code\": \"3h\",\n      \"inBag\": true\n    },\n    {\n      \"code\": \"4h\",\n      \"inBag\": true\n    },\n    {\n      \"code\": \"5i\",\n      \"inBag\": true\n    },\n    {\n      \"code\": \"6i\",\n      \"inBag\": true\n    },\n    {\n      \"code\": \"7i\",\n      \"inBag\": true\n    },\n    {\n      \"code\": \"8i\",\n      \"inBag\": true\n    },\n    {\n      \"code\": \"9i\",\n      \"inBag\": true\n    },\n    {\n      \"code\": \"pw\",\n      \"inBag\": true\n    },\n    {\n      \"code\": \"gw\",\n      \"inBag\": true\n    },\n    {\n      \"code\": \"sw\",\n      \"inBag\": true\n    },\n    {\n      \"code\": \"lw\",\n      \"inBag\": true\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 422\", () => pm.response.to.have.status(422));",
+                  "pm.test(\"JSON error VALIDATION_FAILED\", () => {",
+                  "  const e = pm.response.json().error;",
+                  "  pm.expect(pm.response.json().success).to.eql(false);",
+                  "  pm.expect(e.status).to.eql(422);",
+                  "  pm.expect(e.code).to.eql(\"VALIDATION_FAILED\");",
+                  "  pm.expect(e.message).to.be.a(\"string\");",
+                  "  pm.expect(e.requestId).to.match(/^req_[0-9a-f]{6}$/);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "7. Leaderboard",
+      "item": [
+        {
+          "name": "Leaderboard by average score, this season",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{arohaToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/leaderboard?sort=avgScore&period=season",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "leaderboard"
+              ],
+              "query": [
+                {
+                  "key": "sort",
+                  "value": "avgScore"
+                },
+                {
+                  "key": "period",
+                  "value": "season"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"JSON success envelope\", () => {",
+                  "  pm.response.to.be.json;",
+                  "  pm.expect(pm.response.json().success).to.eql(true);",
+                  "});",
+                  "const b = pm.response.json();",
+                  "pm.test(\"matches the A2 leaderboard structure\", () => {",
+                  "  pm.expect(b.data[0]).to.have.all.keys(\"rank\", \"userId\", \"displayName\", \"homeCourse\", \"averageScore\", \"improvement\", \"roundsPlayed\");",
+                  "  pm.expect(b.meta).to.include({ sort: \"avgScore\", period: \"season\", minimumRounds: 3 });",
+                  "  pm.expect(b.meta.currentUser).to.include({ onLeaderboard: true });",
+                  "});",
+                  "pm.test(\"lowest average first\", () => {",
+                  "  const avgs = b.data.map(r => r.averageScore);",
+                  "  pm.expect([...avgs].sort((a, c) => a - c)).to.eql(avgs);",
+                  "});",
+                  "pm.test(\"opted-out and under-3-round golfers are hidden, no emails\", () => {",
+                  "  const names = b.data.map(r => r.displayName);",
+                  "  pm.expect(names).to.not.include(\"Hemi T.\");",
+                  "  pm.expect(names).to.not.include(\"Lucy B.\");",
+                  "  pm.expect(pm.response.text()).to.not.include(\"@example.com\");",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Most improved, last 30 days",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{arohaToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/leaderboard?sort=improved&period=month",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "leaderboard"
+              ],
+              "query": [
+                {
+                  "key": "sort",
+                  "value": "improved"
+                },
+                {
+                  "key": "period",
+                  "value": "month"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"JSON success envelope\", () => {",
+                  "  pm.response.to.be.json;",
+                  "  pm.expect(pm.response.json().success).to.eql(true);",
+                  "});",
+                  "pm.test(\"biggest improvement first\", () => {",
+                  "  const imp = pm.response.json().data.map(r => r.improvement);",
+                  "  pm.expect([...imp].sort((a, c) => a - c)).to.eql(imp);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Most rounds, all time",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{arohaToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/leaderboard?sort=rounds&period=all&page=1&limit=3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "leaderboard"
+              ],
+              "query": [
+                {
+                  "key": "sort",
+                  "value": "rounds"
+                },
+                {
+                  "key": "period",
+                  "value": "all"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "3"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"JSON success envelope\", () => {",
+                  "  pm.response.to.be.json;",
+                  "  pm.expect(pm.response.json().success).to.eql(true);",
+                  "});",
+                  "const b = pm.response.json();",
+                  "pm.test(\"paged to 3 rows, most rounds first\", () => {",
+                  "  pm.expect(b.data.length).to.eql(3);",
+                  "  pm.expect(b.data[0].roundsPlayed >= b.data[1].roundsPlayed).to.be.true;",
+                  "  pm.expect(b.meta.total).to.eql(5);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "8. Errors and default route",
+      "item": [
+        {
+          "name": "Unknown route (404)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/no-such-thing",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "no-such-thing"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 404\", () => pm.response.to.have.status(404));",
+                  "pm.test(\"JSON error NOT_FOUND\", () => {",
+                  "  const e = pm.response.json().error;",
+                  "  pm.expect(pm.response.json().success).to.eql(false);",
+                  "  pm.expect(e.status).to.eql(404);",
+                  "  pm.expect(e.code).to.eql(\"NOT_FOUND\");",
+                  "  pm.expect(e.message).to.be.a(\"string\");",
+                  "  pm.expect(e.requestId).to.match(/^req_[0-9a-f]{6}$/);",
+                  "});",
+                  "pm.test(\"message names the route\", () => pm.expect(pm.response.json().error.message).to.eql(\"There is no GET /api/no-such-thing in the Budget Golfers API.\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Unknown route outside /api (404)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/admin/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "admin",
+                "login"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 404\", () => pm.response.to.have.status(404));",
+                  "pm.test(\"JSON error NOT_FOUND\", () => {",
+                  "  const e = pm.response.json().error;",
+                  "  pm.expect(pm.response.json().success).to.eql(false);",
+                  "  pm.expect(e.status).to.eql(404);",
+                  "  pm.expect(e.code).to.eql(\"NOT_FOUND\");",
+                  "  pm.expect(e.message).to.be.a(\"string\");",
+                  "  pm.expect(e.requestId).to.match(/^req_[0-9a-f]{6}$/);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "No token (401)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/rounds",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "rounds"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 401\", () => pm.response.to.have.status(401));",
+                  "pm.test(\"JSON error UNAUTHENTICATED\", () => {",
+                  "  const e = pm.response.json().error;",
+                  "  pm.expect(pm.response.json().success).to.eql(false);",
+                  "  pm.expect(e.status).to.eql(401);",
+                  "  pm.expect(e.code).to.eql(\"UNAUTHENTICATED\");",
+                  "  pm.expect(e.message).to.be.a(\"string\");",
+                  "  pm.expect(e.requestId).to.match(/^req_[0-9a-f]{6}$/);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Invalid token (401)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer not.a.token"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/rounds",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "rounds"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 401\", () => pm.response.to.have.status(401));",
+                  "pm.test(\"JSON error UNAUTHENTICATED\", () => {",
+                  "  const e = pm.response.json().error;",
+                  "  pm.expect(pm.response.json().success).to.eql(false);",
+                  "  pm.expect(e.status).to.eql(401);",
+                  "  pm.expect(e.code).to.eql(\"UNAUTHENTICATED\");",
+                  "  pm.expect(e.message).to.be.a(\"string\");",
+                  "  pm.expect(e.requestId).to.match(/^req_[0-9a-f]{6}$/);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Malformed JSON (400)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\": \"aroha.m@example.com\", ",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"JSON error BAD_REQUEST\", () => {",
+                  "  const e = pm.response.json().error;",
+                  "  pm.expect(pm.response.json().success).to.eql(false);",
+                  "  pm.expect(e.status).to.eql(400);",
+                  "  pm.expect(e.code).to.eql(\"BAD_REQUEST\");",
+                  "  pm.expect(e.message).to.be.a(\"string\");",
+                  "  pm.expect(e.requestId).to.match(/^req_[0-9a-f]{6}$/);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "9. Clean up",
+      "item": [
+        {
+          "name": "Delete the test account (204)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{testerToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/{{testerId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "{{testerId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 204\", () => pm.response.to.have.status(204));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Deleted account can no longer be used (401)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{testerToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "me"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 401\", () => pm.response.to.have.status(401));",
+                  "pm.test(\"JSON error UNAUTHENTICATED\", () => {",
+                  "  const e = pm.response.json().error;",
+                  "  pm.expect(pm.response.json().success).to.eql(false);",
+                  "  pm.expect(e.status).to.eql(401);",
+                  "  pm.expect(e.code).to.eql(\"UNAUTHENTICATED\");",
+                  "  pm.expect(e.message).to.be.a(\"string\");",
+                  "  pm.expect(e.requestId).to.match(/^req_[0-9a-f]{6}$/);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "arohaToken",
+      "value": ""
+    },
+    {
+      "key": "arohaId",
+      "value": "66f0a1c2e4b0a1b2c3d4e5f6"
+    },
+    {
+      "key": "testerToken",
+      "value": ""
+    },
+    {
+      "key": "testerId",
+      "value": ""
+    },
+    {
+      "key": "testerEmail",
+      "value": ""
+    },
+    {
+      "key": "clientRoundId",
+      "value": ""
+    },
+    {
+      "key": "roundId",
+      "value": ""
+    }
+  ]
+}

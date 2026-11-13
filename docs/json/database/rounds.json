@@ -1,0 +1,96 @@
+{
+  "_id": {
+    "$oid": "66f2c9e0b1a2c3d4e5f60718"
+  },
+  "userId": {
+    "$oid": "66f0a1c2e4b0a1b2c3d4e5f6"
+  },
+  "clientRoundId": "a3f1c9e2-5b7d-4e8a-9c1f-2d6b8e4a7c10",
+  "source": "mobile-app",
+  "course": {
+    "courseId": {
+      "$oid": "66e9b7d1a2c3d4e5f6a7b8c9"
+    },
+    "name": "Omanu Golf Club",
+    "par": 72
+  },
+  "tee": "Yellow",
+  "playedAt": {
+    "$date": "2026-09-12T02:10:00.000Z"
+  },
+  "holesPlayed": 18,
+  "totals": {
+    "strokes": 84,
+    "toPar": 12,
+    "putts": 31,
+    "penalties": 1,
+    "fairwaysHit": 9,
+    "fairwaysPossible": 14,
+    "greensInRegulation": 5
+  },
+  "holes": [
+    {
+      "number": 1,
+      "par": 4,
+      "distanceMetres": 352,
+      "strokes": 4,
+      "putts": 2,
+      "penalties": 0,
+      "teeClub": "driver",
+      "fairwayHit": true,
+      "greenInRegulation": true,
+      "shots": [
+        {
+          "seq": 1,
+          "club": "driver",
+          "start": {
+            "type": "Point",
+            "coordinates": [
+              176.22401,
+              -37.67412
+            ]
+          },
+          "end": {
+            "type": "Point",
+            "coordinates": [
+              176.22455,
+              -37.67601
+            ]
+          },
+          "distanceMetres": 214,
+          "result": "fairway"
+        },
+        {
+          "seq": 2,
+          "club": "8i",
+          "start": {
+            "type": "Point",
+            "coordinates": [
+              176.22455,
+              -37.67601
+            ]
+          },
+          "end": {
+            "type": "Point",
+            "coordinates": [
+              176.2247,
+              -37.67712
+            ]
+          },
+          "distanceMetres": 127,
+          "result": "green"
+        }
+      ]
+    },
+    {
+      "note": "…one hole object per hole played (9 or 18)"
+    }
+  ],
+  "notes": "Windy back nine",
+  "createdAt": {
+    "$date": "2026-09-12T04:41:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2026-09-12T04:41:00.000Z"
+  }
+}

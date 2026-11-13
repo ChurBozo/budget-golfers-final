@@ -1,0 +1,300 @@
+newman
+
+Budget Golfers API
+
+❏ 0. Setup
+↳ Health check
+  GET http://localhost:3000/api/health [200 OK, 1.12kB, 32ms]
+  ✓  Status 200
+  ✓  JSON success envelope
+  ✓  status is ok
+
+↳ Sign in as Aroha (seed user)
+  POST http://localhost:3000/api/auth/login [200 OK, 1.44kB, 385ms]
+  ✓  Status 200
+  ✓  JSON success envelope
+  ✓  token and user returned
+
+↳ Register a test golfer (201)
+  POST http://localhost:3000/api/auth/register [201 Created, 1.52kB, 368ms]
+  ✓  Status 201
+  ✓  JSON success envelope
+  ✓  Location header points at the new user
+  ✓  app token lasts 30 days
+
+❏ 1. Auth
+↳ Register with a used email (409)
+  POST http://localhost:3000/api/auth/register [409 Conflict, 1.19kB, 9ms]
+  ✓  Status 409
+  ✓  JSON error EMAIL_TAKEN
+
+↳ Register with invalid fields (422)
+  POST http://localhost:3000/api/auth/register [422 Unprocessable Entity, 1.39kB, 7ms]
+  ✓  Status 422
+  ✓  JSON error VALIDATION_FAILED
+  ✓  one detail per bad field
+
+↳ Login with a wrong password (401)
+  POST http://localhost:3000/api/auth/login [401 Unauthorized, 1.19kB, 374ms]
+  ✓  Status 401
+  ✓  JSON error UNAUTHENTICATED
+  ✓  does not say which part was wrong
+
+❏ 2. Users
+↳ Get my profile
+  GET http://localhost:3000/api/users/me [200 OK, 1.54kB, 14ms]
+  ✓  Status 200
+  ✓  JSON success envelope
+  ✓  matches the A2 users/me structure
+
+↳ Change my preferences
+  PATCH http://localhost:3000/api/users/6aebce89e8140af6fab77ba8 [200 OK, 1.56kB, 16ms]
+  ✓  Status 200
+  ✓  JSON success envelope
+  ✓  name and preferences changed
+  ✓  role is not exposed or settable
+
+↳ Change someone else's account (403)
+  PATCH http://localhost:3000/api/users/66f0a1c2e4b0a1b2c3d4e5f6 [403 Forbidden, 1.19kB, 7ms]
+  ✓  Status 403
+  ✓  JSON error FORBIDDEN
+
+↳ Export my data as JSON
+  GET http://localhost:3000/api/users/66f0a1c2e4b0a1b2c3d4e5f6/export?format=json [200 OK, 328.3kB, 69ms]
+  ✓  Status 200
+  ✓  JSON success envelope
+  ✓  download headers
+  ✓  rounds, courses and clubs included
+
+↳ Export my data as CSV
+  GET http://localhost:3000/api/users/66f0a1c2e4b0a1b2c3d4e5f6/export?format=csv [200 OK, 68.71kB, 85ms]
+  ✓  Status 200
+  ✓  CSV file
+  ✓  one row per hole plus the club table
+
+❏ 3. Rounds
+↳ List my rounds (page 1)
+  GET http://localhost:3000/api/rounds?page=1&limit=10 [200 OK, 4.92kB, 21ms]
+  ✓  Status 200
+  ✓  JSON success envelope
+  ✓  matches the A2 rounds list structure
+  ✓  newest first
+
+↳ Filter rounds by date, holes and course
+  GET http://localhost:3000/api/rounds?from=2026-09-01&to=2026-09-30&holes=18&courseId=66e9b7d1a2c3d4e5f6a7b8c9 [200 OK, 2.48kB, 21ms]
+  ✓  Status 200
+  ✓  JSON success envelope
+  ✓  only 18-hole Omanu rounds in September
+
+↳ Sort rounds by score
+  GET http://localhost:3000/api/rounds?sort=strokes&holes=18&limit=3 [200 OK, 2.42kB, 18ms]
+  ✓  Status 200
+  ✓  JSON success envelope
+  ✓  lowest score first and it is the personal best
+
+↳ Get one round (the A2 example round)
+  GET http://localhost:3000/api/rounds/66f2c9e0b1a2c3d4e5f60718 [200 OK, 12.14kB, 15ms]
+  ✓  Status 200
+  ✓  JSON success envelope
+  ✓  matches the A2 round detail
+  ✓  shots use { lat, lng }
+
+↳ Upload a round from the app (201)
+  POST http://localhost:3000/api/rounds [201 Created, 1.33kB, 87ms]
+  ✓  Status 201
+  ✓  JSON success envelope
+  ✓  totals worked out by the server
+  ✓  Location header
+
+↳ Upload the same round again (200 duplicate)
+  POST http://localhost:3000/api/rounds [200 OK, 1.33kB, 11ms]
+  ✓  Status 200
+  ✓  JSON success envelope
+  ✓  the saved round is returned, not a copy
+
+↳ Get the uploaded round
+  GET http://localhost:3000/api/rounds/6aebce8ae8140af6fab77bcb [200 OK, 4.36kB, 12ms]
+  ✓  Status 200
+  ✓  JSON success envelope
+  ✓  the course was created from its name
+  ✓  shot distance measured from GPS
+
+↳ Correct a hole score
+  PATCH http://localhost:3000/api/rounds/6aebce8ae8140af6fab77bcb [200 OK, 4.37kB, 41ms]
+  ✓  Status 200
+  ✓  JSON success envelope
+  ✓  hole changed and totals recalculated
+
+↳ Get another golfer's round (404)
+  GET http://localhost:3000/api/rounds/66f2c9e0b1a2c3d4e5f60718 [404 Not Found, 1.17kB, 8ms]
+  ✓  Status 404
+  ✓  JSON error NOT_FOUND
+
+↳ Upload a round with a bad score (422)
+  POST http://localhost:3000/api/rounds [422 Unprocessable Entity, 1.27kB, 9ms]
+  ✓  Status 422
+  ✓  JSON error VALIDATION_FAILED
+  ✓  matches the A2 error example
+
+↳ List with limit=500 (400)
+  GET http://localhost:3000/api/rounds?limit=500 [400 Bad Request, 1.25kB, 5ms]
+  ✓  Status 400
+  ✓  JSON error BAD_REQUEST
+
+↳ Delete the uploaded round (204)
+  DELETE http://localhost:3000/api/rounds/6aebce8ae8140af6fab77bcb [204 No Content, 945B, 40ms]
+  ✓  Status 204
+  ✓  no body
+
+↳ Get the deleted round (404)
+  GET http://localhost:3000/api/rounds/6aebce8ae8140af6fab77bcb [404 Not Found, 1.17kB, 8ms]
+  ✓  Status 404
+  ✓  JSON error NOT_FOUND
+
+❏ 4. Courses
+↳ List my courses
+  GET http://localhost:3000/api/courses [200 OK, 1.53kB, 15ms]
+  ✓  Status 200
+  ✓  JSON success envelope
+  ✓  matches the A2 courses list
+  ✓  a self-named 9-hole course with no par for 18
+
+↳ Search courses
+  GET http://localhost:3000/api/courses?search=oma [200 OK, 1.34kB, 13ms]
+  ✓  Status 200
+  ✓  JSON success envelope
+  ✓  finds Omanu
+
+↳ Get one course with tees and holes
+  GET http://localhost:3000/api/courses/66e9b7d1a2c3d4e5f6a7b8c9 [200 OK, 2.88kB, 11ms]
+  ✓  Status 200
+  ✓  JSON success envelope
+  ✓  tees, holes and location
+
+↳ Get another golfer's course (404)
+  GET http://localhost:3000/api/courses/66e9b7d1a2c3d4e5f6a7b8c9 [404 Not Found, 1.17kB, 9ms]
+  ✓  Status 404
+  ✓  JSON error NOT_FOUND
+
+❏ 5. Stats
+↳ My stats, last 20 rounds
+  GET http://localhost:3000/api/stats/66f0a1c2e4b0a1b2c3d4e5f6?period=last20 [200 OK, 3.6kB, 38ms]
+  ✓  Status 200
+  ✓  JSON success envelope
+  ✓  matches the A2 stats structure
+  ✓  20 rounds in the period, 32 in total
+  ✓  trend has a rolling average
+
+↳ My stats, all time
+  GET http://localhost:3000/api/stats/66f0a1c2e4b0a1b2c3d4e5f6?period=all [200 OK, 4.46kB, 22ms]
+  ✓  Status 200
+  ✓  JSON success envelope
+  ✓  best score is the A2 example round
+
+↳ Someone else's stats (403)
+  GET http://localhost:3000/api/stats/66f0a1c2e4b0a1b2c3d4e5f6 [403 Forbidden, 1.19kB, 3ms]
+  ✓  Status 403
+  ✓  JSON error FORBIDDEN
+  ✓  message from the A2 design
+
+↳ Unknown period (400)
+  GET http://localhost:3000/api/stats/66f0a1c2e4b0a1b2c3d4e5f6?period=decade [400 Bad Request, 1.32kB, 4ms]
+  ✓  Status 400
+  ✓  JSON error BAD_REQUEST
+
+❏ 6. Clubs
+↳ My clubs with distances
+  GET http://localhost:3000/api/clubs/66f0a1c2e4b0a1b2c3d4e5f6 [200 OK, 3.11kB, 10ms]
+  ✓  Status 200
+  ✓  JSON success envelope
+  ✓  matches the A2 clubs structure
+  ✓  driver has an average; 4 iron does not have enough shots
+
+↳ Replace my bag
+  PUT http://localhost:3000/api/clubs/6aebce89e8140af6fab77ba8 [200 OK, 1.62kB, 13ms]
+  ✓  Status 200
+  ✓  JSON success envelope
+  ✓  bag replaced, units from my preferences
+
+↳ Put 15 clubs in the bag (422)
+  PUT http://localhost:3000/api/clubs/6aebce89e8140af6fab77ba8 [422 Unprocessable Entity, 1.28kB, 5ms]
+  ✓  Status 422
+  ✓  JSON error VALIDATION_FAILED
+
+❏ 7. Leaderboard
+↳ Leaderboard by average score, this season
+  GET http://localhost:3000/api/leaderboard?sort=avgScore&period=season [200 OK, 2.12kB, 25ms]
+  ✓  Status 200
+  ✓  JSON success envelope
+  ✓  matches the A2 leaderboard structure
+  ✓  lowest average first
+  ✓  opted-out and under-3-round golfers are hidden, no emails
+
+↳ Most improved, last 30 days
+  GET http://localhost:3000/api/leaderboard?sort=improved&period=month [200 OK, 2.11kB, 25ms]
+  ✓  Status 200
+  ✓  JSON success envelope
+  ✓  biggest improvement first
+
+↳ Most rounds, all time
+  GET http://localhost:3000/api/leaderboard?sort=rounds&period=all&page=1&limit=3 [200 OK, 1.78kB, 29ms]
+  ✓  Status 200
+  ✓  JSON success envelope
+  ✓  paged to 3 rows, most rounds first
+
+❏ 8. Errors and default route
+↳ Unknown route (404)
+  GET http://localhost:3000/api/no-such-thing [404 Not Found, 1.21kB, 4ms]
+  ✓  Status 404
+  ✓  JSON error NOT_FOUND
+  ✓  message names the route
+
+↳ Unknown route outside /api (404)
+  POST http://localhost:3000/admin/login [404 Not Found, 1.13kB, 3ms]
+  ✓  Status 404
+  ✓  JSON error NOT_FOUND
+
+↳ No token (401)
+  GET http://localhost:3000/api/rounds [401 Unauthorized, 1.2kB, 4ms]
+  ✓  Status 401
+  ✓  JSON error UNAUTHENTICATED
+
+↳ Invalid token (401)
+  GET http://localhost:3000/api/rounds [401 Unauthorized, 1.21kB, 3ms]
+  ✓  Status 401
+  ✓  JSON error UNAUTHENTICATED
+
+↳ Malformed JSON (400)
+  POST http://localhost:3000/api/auth/login [400 Bad Request, 1.11kB, 4ms]
+  ✓  Status 400
+  ✓  JSON error BAD_REQUEST
+
+❏ 9. Clean up
+↳ Delete the test account (204)
+  DELETE http://localhost:3000/api/users/6aebce89e8140af6fab77ba8 [204 No Content, 945B, 14ms]
+  ✓  Status 204
+
+↳ Deleted account can no longer be used (401)
+  GET http://localhost:3000/api/users/me [401 Unauthorized, 1.21kB, 5ms]
+  ✓  Status 401
+  ✓  JSON error UNAUTHENTICATED
+
+┌─────────────────────────┬───────────────────┬──────────────────┐
+│                         │          executed │           failed │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│              iterations │                 1 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│                requests │                45 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│            test-scripts │                45 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│      prerequest-scripts │                 1 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│              assertions │               132 │                0 │
+├─────────────────────────┴───────────────────┴──────────────────┤
+│ total run duration: 3s                                         │
+├────────────────────────────────────────────────────────────────┤
+│ total data received: 438.55kB (approx)                         │
+├────────────────────────────────────────────────────────────────┤
+│ average response time: 42ms [min: 3ms, max: 385ms, s.d.: 91ms] │
+└────────────────────────────────────────────────────────────────┘

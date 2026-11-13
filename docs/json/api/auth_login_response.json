@@ -1,0 +1,17 @@
+{
+  "success": true,
+  "data": {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NmYwYTFjMmU0YjBhMWIyYzNkNGU1ZjYifQ.sig",
+    "expiresIn": 3600,
+    "user": {
+      "id": "66f0a1c2e4b0a1b2c3d4e5f6",
+      "email": "aroha.m@example.com",
+      "displayName": "Aroha M.",
+      "preferences": {
+        "units": "metric",
+        "theme": "light",
+        "showOnLeaderboard": true
+      }
+    }
+  }
+}

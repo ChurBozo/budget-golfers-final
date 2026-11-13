@@ -1,0 +1,95 @@
+{
+  "success": true,
+  "data": {
+    "id": "66f2c9e0b1a2c3d4e5f60718",
+    "playedAt": "2026-09-12T02:10:00.000Z",
+    "syncedAt": "2026-09-12T04:41:00.000Z",
+    "course": {
+      "id": "66e9b7d1a2c3d4e5f6a7b8c9",
+      "name": "Omanu Golf Club",
+      "par": 72
+    },
+    "tee": "Yellow",
+    "holesPlayed": 18,
+    "totals": {
+      "strokes": 84,
+      "toPar": 12,
+      "putts": 31,
+      "fairwaysHit": 9,
+      "fairwaysPossible": 14,
+      "greensInRegulation": 5
+    },
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "distanceMetres": 352,
+        "strokes": 4,
+        "putts": 2,
+        "penalties": 0,
+        "teeClub": "driver",
+        "fairwayHit": true,
+        "greenInRegulation": true
+      },
+      {
+        "number": 2,
+        "par": 3,
+        "distanceMetres": 148,
+        "strokes": 4,
+        "putts": 2,
+        "penalties": 0,
+        "teeClub": "6i",
+        "greenInRegulation": false
+      },
+      {
+        "number": 7,
+        "par": 4,
+        "distanceMetres": 318,
+        "strokes": 6,
+        "putts": 3,
+        "penalties": 0,
+        "teeClub": "driver",
+        "fairwayHit": false,
+        "greenInRegulation": false,
+        "shots": [
+          {
+            "seq": 1,
+            "club": "driver",
+            "start": {
+              "lat": -37.67412,
+              "lng": 176.22401
+            },
+            "end": {
+              "lat": -37.67595,
+              "lng": 176.22498
+            },
+            "distanceMetres": 219,
+            "result": "rough-left"
+          },
+          {
+            "seq": 2,
+            "club": "7i",
+            "start": {
+              "lat": -37.67595,
+              "lng": 176.22498
+            },
+            "end": {
+              "lat": -37.6769,
+              "lng": 176.2253
+            },
+            "distanceMetres": 112,
+            "result": "bunker"
+          }
+        ]
+      },
+      {
+        "note": "…holes 3–6 and 8–18 follow the same structure"
+      }
+    ],
+    "notes": "Windy back nine",
+    "links": {
+      "self": "/api/rounds/66f2c9e0b1a2c3d4e5f60718",
+      "course": "/api/courses/66e9b7d1a2c3d4e5f6a7b8c9"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "success": false,
+  "error": {
+    "status": 422,
+    "code": "VALIDATION_FAILED",
+    "message": "Some fields are not valid.",
+    "details": [
+      {
+        "field": "holes[3].strokes",
+        "issue": "must be between 1 and 20"
+      }
+    ],
+    "requestId": "req_7f3a2c"
+  }
+}

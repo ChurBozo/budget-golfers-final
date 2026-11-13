@@ -1,0 +1,17 @@
+{
+  "clubs": [
+    {
+      "code": "driver",
+      "inBag": true
+    },
+    {
+      "code": "4i",
+      "inBag": false
+    },
+    {
+      "code": "5h",
+      "label": "5 hybrid",
+      "inBag": true
+    }
+  ]
+}

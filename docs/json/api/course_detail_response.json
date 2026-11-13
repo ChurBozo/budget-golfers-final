@@ -1,0 +1,41 @@
+{
+  "success": true,
+  "data": {
+    "id": "66e9b7d1a2c3d4e5f6a7b8c9",
+    "name": "Omanu Golf Club",
+    "region": "Bay of Plenty",
+    "par": 72,
+    "location": {
+      "lat": -37.6739,
+      "lng": 176.2238
+    },
+    "tees": [
+      {
+        "name": "Yellow",
+        "par": 72,
+        "totalMetres": 5892,
+        "courseRating": 69.8,
+        "slopeRating": 121
+      }
+    ],
+    "holes": [
+      {
+        "number": 1,
+        "par": 4,
+        "strokeIndex": 7,
+        "metres": {
+          "Yellow": 352,
+          "White": 371
+        }
+      },
+      {
+        "note": "…one object per hole the course knows"
+      }
+    ],
+    "createdAt": "2025-10-18T08:30:00.000Z",
+    "links": {
+      "self": "/api/courses/66e9b7d1a2c3d4e5f6a7b8c9",
+      "rounds": "/api/rounds?courseId=66e9b7d1a2c3d4e5f6a7b8c9"
+    }
+  }
+}

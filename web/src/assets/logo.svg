@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Budget Golfers logo">
+  <title>Budget Golfers</title>
+  <rect width="64" height="64" rx="16" fill="#006A4E"/>
+  <!-- rolling fairway -->
+  <path d="M0 46c12-7 26-8 40-4 9 3 17 3 24 0v22H0z" fill="#0B3D2E"/>
+  <path d="M0 50c14-5 27-5 40-1 9 3 17 2 24-1" fill="none" stroke="#A0D6B4" stroke-width="2" opacity=".55"/>
+  <!-- flag -->
+  <rect x="33" y="12" width="2.6" height="32" rx="1.3" fill="#FFFFFF"/>
+  <path d="M35.6 12.5 50 18.2l-14.4 5.8z" fill="#A0D6B4"/>
+  <!-- ball (coin notch = budget) -->
+  <circle cx="21" cy="38" r="7" fill="#FFFFFF"/>
+  <circle cx="19" cy="36" r="1" fill="#B8D8D0"/>
+  <circle cx="22.5" cy="35.5" r="1" fill="#B8D8D0"/>
+  <circle cx="20.5" cy="39.5" r="1" fill="#B8D8D0"/>
+  <circle cx="24" cy="39" r="1" fill="#B8D8D0"/>
+</svg>

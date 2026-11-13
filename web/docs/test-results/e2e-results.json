@@ -1,0 +1,129 @@
+{
+  "ranAt": "2026-11-05T01:26:11.375Z",
+  "web": "http://127.0.0.1:5000",
+  "api": "http://localhost:3000",
+  "passed": 24,
+  "failed": 0,
+  "results": [
+    {
+      "name": "A private page without a session redirects to /login",
+      "ok": true,
+      "ms": 622
+    },
+    {
+      "name": "Wrong password shows the API 401 message under the field",
+      "ok": true,
+      "ms": 1308
+    },
+    {
+      "name": "Register checks the fields in the browser first",
+      "ok": true,
+      "ms": 484
+    },
+    {
+      "name": "Registering a new golfer signs them in to an empty dashboard",
+      "ok": true,
+      "ms": 1049
+    },
+    {
+      "name": "Rounds uploaded with the app format appear after a refresh",
+      "ok": true,
+      "ms": 949
+    },
+    {
+      "name": "Period chips change the URL and the numbers",
+      "ok": true,
+      "ms": 114
+    },
+    {
+      "name": "Round history filters live in the URL",
+      "ok": true,
+      "ms": 523
+    },
+    {
+      "name": "Round detail shows the scorecard and the shot list",
+      "ok": true,
+      "ms": 440
+    },
+    {
+      "name": "Deleting a round asks first, then returns to the list",
+      "ok": true,
+      "ms": 861
+    },
+    {
+      "name": "Units change to yards and are saved on the account",
+      "ok": true,
+      "ms": 690
+    },
+    {
+      "name": "Deep link: a new tab asks to sign in, then opens that round",
+      "ok": true,
+      "ms": 1098
+    },
+    {
+      "name": "Settings: export downloads a CSV file",
+      "ok": true,
+      "ms": 399
+    },
+    {
+      "name": "Settings: deleting the account needs DELETE typed, then signs out",
+      "ok": true,
+      "ms": 322
+    },
+    {
+      "name": "Dashboard for the seeded golfer (light theme)",
+      "ok": true,
+      "ms": 1519
+    },
+    {
+      "name": "API annotations show which request fills each component",
+      "ok": true,
+      "ms": 888
+    },
+    {
+      "name": "Round history and filters",
+      "ok": true,
+      "ms": 608
+    },
+    {
+      "name": "Round detail: the A2 example round",
+      "ok": true,
+      "ms": 837
+    },
+    {
+      "name": "Clubs: distance bars and the not-enough-data state",
+      "ok": true,
+      "ms": 336
+    },
+    {
+      "name": "Leaderboard: own row highlighted, sort and period chips",
+      "ok": true,
+      "ms": 515
+    },
+    {
+      "name": "Settings",
+      "ok": true,
+      "ms": 345
+    },
+    {
+      "name": "Unknown address shows the 404 view",
+      "ok": true,
+      "ms": 344
+    },
+    {
+      "name": "Dark theme (saved on the account)",
+      "ok": true,
+      "ms": 2367
+    },
+    {
+      "name": "Phone layout: bottom tab bar under 760 px",
+      "ok": true,
+      "ms": 1566
+    },
+    {
+      "name": "No JavaScript errors in the browser console",
+      "ok": true,
+      "ms": 0
+    }
+  ]
+}

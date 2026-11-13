@@ -1,0 +1,41 @@
+{
+  "name": "budget-golfers-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Budget Golfers REST API: Express + Mongoose, layered MVC. Serves the website and the Flutter app.",
+  "main": "src/server.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "seed": "node seed/seed.js",
+    "seed:generate": "node seed/generate.js",
+    "test": "jest",
+    "test:unit": "jest tests/unit tests/http",
+    "test:integration": "jest tests/integration --runInBand",
+    "postman": "newman run postman/BudgetGolfers.postman_collection.json -e postman/BudgetGolfers.local.postman_environment.json"
+  },
+  "license": "UNLICENSED",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.6",
+    "dotenv": "^16.6.1",
+    "express": "^5.3.0",
+    "express-rate-limit": "^7.5.1",
+    "helmet": "^8.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^8.24.8",
+    "morgan": "^1.12.1",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "mongodb-memory-server-core": "^10.4.3",
+    "newman": "^6.2.3",
+    "newman-reporter-htmlextra": "^1.23.1",
+    "nodemon": "^3.1.14",
+    "supertest": "^7.3.1"
+  }
+}

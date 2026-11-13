@@ -1,0 +1,42 @@
+{
+  "_id": {
+    "$oid": "66f0a1c2e4b0a1b2c3d4e5f6"
+  },
+  "email": "aroha.m@example.com",
+  "passwordHash": "$2b$12$Qm2x9w5Yv1g7mJ3xkq8y1u8d5d0yF3aJq6j5jH0cQeYfM0Qx1bQ9e",
+  "displayName": "Aroha M.",
+  "role": "golfer",
+  "homeCourseId": {
+    "$oid": "66e9b7d1a2c3d4e5f6a7b8c9"
+  },
+  "preferences": {
+    "units": "metric",
+    "theme": "light",
+    "showOnLeaderboard": true
+  },
+  "statsSnapshot": {
+    "roundsPlayed": 37,
+    "averageScoreLast20": 91.4,
+    "averageScorePrev20": 93.5,
+    "bestScore": 84,
+    "handicapEstimate": 18.4,
+    "lastRoundAt": {
+      "$date": "2026-09-12T02:10:00.000Z"
+    }
+  },
+  "devices": [
+    {
+      "deviceId": "app-7d2e41",
+      "platform": "android",
+      "lastSyncAt": {
+        "$date": "2026-09-12T04:41:00.000Z"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2026-08-02T09:14:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2026-09-12T04:41:03.000Z"
+  }
+}
