@@ -13,6 +13,7 @@ import '../models/round.dart';
 import '../services.dart';
 import '../theme.dart';
 import '../util/format.dart';
+import '../widgets/controller_dialog.dart';
 import '../widgets/stat_tile.dart';
 
 /// Profile: Clubs, Performance and Accuracy tabs, ported from the old app.
@@ -108,32 +109,32 @@ class _ClubsTab extends StatelessWidget {
   Future<void> _editDistance(BuildContext context, int i) async {
     final metric = AppScope.read(context).metric;
     final club = bag[i];
-    final controller = TextEditingController(
-      text: club.manualMetres == null
-          ? ''
-          : Fmt.fromMetres(club.manualMetres!, metric: metric).round().toString(),
-    );
+    final initial = club.manualMetres == null
+        ? ''
+        : Fmt.fromMetres(club.manualMetres!, metric: metric).round().toString();
     final result = await showDialog<String>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text(club.label),
-        content: TextField(
-          controller: controller,
-          keyboardType: TextInputType.number,
-          autofocus: true,
-          decoration: InputDecoration(
-            labelText: 'Your usual distance',
-            suffixText: Fmt.unit(metric),
-            helperText: 'Used until this club has ${ClubStats.minimumShots} measured shots.',
+      builder: (context) => ControllerDialog(
+        initialText: initial,
+        builder: (context, controller) => AlertDialog(
+          title: Text(club.label),
+          content: TextField(
+            controller: controller,
+            keyboardType: TextInputType.number,
+            autofocus: true,
+            decoration: InputDecoration(
+              labelText: 'Your usual distance',
+              suffixText: Fmt.unit(metric),
+              helperText: 'Used until this club has ${ClubStats.minimumShots} measured shots.',
+            ),
           ),
+          actions: [
+            TextButton(onPressed: () => Navigator.pop(context, 'clear'), child: const Text('Clear')),
+            FilledButton(onPressed: () => Navigator.pop(context, controller.text), child: const Text('Save')),
+          ],
         ),
-        actions: [
-          TextButton(onPressed: () => Navigator.pop(context, 'clear'), child: const Text('Clear')),
-          FilledButton(onPressed: () => Navigator.pop(context, controller.text), child: const Text('Save')),
-        ],
       ),
     );
-    controller.dispose();
     if (result == null) return;
     final next = [...bag];
     if (result == 'clear') {

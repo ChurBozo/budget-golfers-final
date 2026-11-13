@@ -19,6 +19,7 @@ import '../theme.dart';
 import '../util/format.dart';
 import '../util/location.dart';
 import '../widgets/club_picker.dart';
+import '../widgets/controller_dialog.dart';
 import '../widgets/scorecard.dart';
 import 'map_screen.dart';
 import 'round_detail_screen.dart';
@@ -311,40 +312,42 @@ class _ScoringScreenState extends State<ScoringScreen> {
     }
 
     final totals = _round.totals;
-    final notes = TextEditingController(text: _round.notes ?? '');
-    final confirmed = await showDialog<bool>(
+    // null = keep playing; a string (maybe empty) = finish with these notes.
+    final finishedNotes = await showDialog<String>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Finish round?'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              '${_round.courseName}: ${totals.strokes} (${Fmt.toPar(totals.toPar)}), '
-              '${totals.putts} putts.',
-            ),
-            const SizedBox(height: 12),
-            TextField(
-              controller: notes,
-              maxLines: 2,
-              decoration: const InputDecoration(
-                labelText: 'Notes (optional)',
-                hintText: 'e.g. Windy back nine',
-                border: OutlineInputBorder(),
+      builder: (context) => ControllerDialog(
+        initialText: _round.notes ?? '',
+        builder: (context, notes) => AlertDialog(
+          title: const Text('Finish round?'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '${_round.courseName}: ${totals.strokes} (${Fmt.toPar(totals.toPar)}), '
+                '${totals.putts} putts.',
               ),
-            ),
+              const SizedBox(height: 12),
+              TextField(
+                controller: notes,
+                maxLines: 2,
+                decoration: const InputDecoration(
+                  labelText: 'Notes (optional)',
+                  hintText: 'e.g. Windy back nine',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(onPressed: () => Navigator.pop(context), child: const Text('Keep playing')),
+            FilledButton(onPressed: () => Navigator.pop(context, notes.text), child: const Text('Finish')),
           ],
         ),
-        actions: [
-          TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('Keep playing')),
-          FilledButton(onPressed: () => Navigator.pop(context, true), child: const Text('Finish')),
-        ],
       ),
     );
-    final noteText = notes.text.trim();
-    notes.dispose();
-    if (confirmed != true || !mounted) return;
+    if (finishedNotes == null || !mounted) return;
+    final noteText = finishedNotes.trim();
 
     _round
       ..notes = noteText.isEmpty ? null : noteText

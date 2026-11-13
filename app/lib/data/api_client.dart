@@ -130,8 +130,18 @@ class ApiClient {
   Future<ApiResult> putClubs(String userId, List<Map<String, dynamic>> clubs) =>
       _send('PUT', '/api/clubs/$userId', body: {'clubs': clubs});
 
-  /// GET /api/health, used by the server address check in Settings.
-  Future<ApiResult> health() => _send('GET', '/api/health', auth: false);
+  /// GET /api/users/:userId/export?format=json: every round on the account,
+  /// with holes and shots, for "Download my rounds" in Settings.
+  Future<ApiResult> exportData(String userId) => _send(
+        'GET',
+        '/api/users/${Uri.encodeComponent(userId)}/export?format=json',
+        wait: const Duration(seconds: 60),
+      );
+
+  /// GET /api/health, used by the server check in Settings. "Wake up" passes
+  /// a longer [wait], because a sleeping free Render server takes about a
+  /// minute to start.
+  Future<ApiResult> health({Duration? wait}) => _send('GET', '/api/health', auth: false, wait: wait);
 
   // ---------- plumbing ----------
 
@@ -156,7 +166,9 @@ class ApiClient {
     Map<String, dynamic>? body,
     Map<String, String>? headers,
     bool auth = true,
+    Duration? wait,
   }) async {
+    final limit = wait ?? timeout;
     final Uri uri;
     try {
       uri = _uri(path);
@@ -181,8 +193,8 @@ class ApiClient {
 
     final http.Response response;
     try {
-      final streamed = await _http.send(request).timeout(timeout);
-      response = await http.Response.fromStream(streamed).timeout(timeout);
+      final streamed = await _http.send(request).timeout(limit);
+      response = await http.Response.fromStream(streamed).timeout(limit);
     } on TimeoutException {
       throw ApiException.network('The Budget Golfers server took too long to answer.');
     } on SocketException {

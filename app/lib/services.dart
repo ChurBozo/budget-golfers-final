@@ -5,6 +5,8 @@ import 'package:flutter/widgets.dart';
 
 import 'data/account_controller.dart';
 import 'data/bag_repository.dart';
+import 'data/course_repository.dart';
+import 'data/download_service.dart';
 import 'data/round_repository.dart';
 import 'data/upload_service.dart';
 
@@ -14,6 +16,7 @@ class Services {
 
   static late AccountController account;
   static late UploadService uploads;
+  static late DownloadService downloads;
 
   static AppLifecycleListener? _lifecycle;
   static StreamSubscription<List<ConnectivityResult>>? _connectivity;
@@ -25,6 +28,12 @@ class Services {
       account: account,
       rounds: RoundRepository.instance,
       loadBag: BagRepository.instance.load,
+    );
+    downloads = DownloadService(
+      account: account,
+      rounds: RoundRepository.instance,
+      knownCourses: CourseRepository.instance.names,
+      rememberCourse: CourseRepository.instance.save,
     );
   }
 

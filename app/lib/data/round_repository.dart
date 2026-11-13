@@ -4,6 +4,7 @@ import 'package:sqflite/sqflite.dart';
 
 import '../models/round.dart';
 import 'app_database.dart';
+import 'download_service.dart';
 
 /// What the upload queue needs from the round store (a fake is used in tests).
 abstract class RoundStore {
@@ -15,7 +16,7 @@ abstract class RoundStore {
 /// Saves and loads rounds. The round being played is saved after every
 /// button press (the old app's draft autosave), so closing the app or a
 /// crash never loses a shot.
-class RoundRepository implements RoundStore {
+class RoundRepository implements RoundStore, RoundLibrary {
   RoundRepository._();
 
   static final RoundRepository instance = RoundRepository._();
@@ -52,6 +53,7 @@ class RoundRepository implements RoundStore {
   }
 
   /// Finished rounds, newest first.
+  @override
   Future<List<Round>> finishedRounds() async {
     final rows = await _db.query(
       'rounds',
@@ -79,6 +81,7 @@ class RoundRepository implements RoundStore {
     return rows.map(_decode).toList();
   }
 
+  @override
   Future<Round?> byId(String clientRoundId) async {
     final rows = await _db.query(
       'rounds',
